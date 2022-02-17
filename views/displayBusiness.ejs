@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Business Account Info
+        </title>
+        <!-- <link rel="stylesheet" href="/style.css"> -->
+    </head>
+    <body>
+        <h1>Info</h1>
+        <!-- ideally we only show the logged in businesses info -->
+        <% for (var i=0; i< businesses.length; i++) {%>
+            <h2>Company Name: <%= businesses[i].CompanyName %></h2> <br>
+            <span>Number of Employees: <%= businesses[i].employeesNum%></span> <br>
+            <span>Manager: <%= businesses[i].managerName%></span> <br>
+            <span>Role: <%= businesses[i].role%></span><br>
+            <span>phone No.: <%= businesses[i].phoneNum%></span>
+        <%} %>
+
+    </body>
+</html>
