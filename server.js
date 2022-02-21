@@ -1,3 +1,4 @@
+console.log('3000')
 const express = require('express');
 const bodyParser= require('body-parser')
 const MongoClient = require('mongodb').MongoClient;
@@ -31,7 +32,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
       .catch(error => console.error(error))
     })
 
-  
+    
     app.get('/', (req, res) => {
       // res.send('Hello World')
 
@@ -45,12 +46,38 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
       const cursor = db.collection('businessCollection').find().toArray()
       .then(results => {
         console.log(results)
-        res.render('displayBusiness.ejs', {businesses: results})
+        res.render('./employer/displayBusiness.ejs', {businesses: results})
       })
       .catch(error => console.error(error))
       // console.log(cursor)//cursor lets you get data from the db - has lots fo methods
     })
   })
 
+  app.get('/', (req, res) => {
+    // res.send('Hello World')
 
+    // console.log(cursor)/
+    res.sendFile(__dirname + '/master-index.html')
+  })
+
+  app.get('/candidate_signup', (req, res) => {
+    // res.send('Hello World')
+
+    // console.log(cursor)/
+    res.sendFile(__dirname + '/candidate-index.html')
+  })
+
+  app.get('/business_signup', (req, res) => {
+    // res.send('Hello World')
+
+    // console.log(cursor)/
+    res.sendFile(__dirname + '/business-index.html')
+  })
+
+  app.get('/hr_signup', (req, res) => {
+    // res.send('Hello World')
+
+    // console.log(cursor)/
+    res.sendFile(__dirname + '/hr-index.html')
+  })
 
