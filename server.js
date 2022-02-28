@@ -1,8 +1,21 @@
-console.log('3000')
 const express = require('express');
 const bodyParser= require('body-parser')
 const MongoClient = require('mongodb').MongoClient;
+var mongoose = require('mongoose');
 const app = express();
+
+
+
+var mongoDB = "mongodb+srv://reinforcements:reinforcements@cluster0.2szva.mongodb.net/reinforcements?retryWrites=true&w=majority";
+mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
+var db = mongoose.connection;
+db.on("connected", function() {
+  console.log(`Connected to MongoDB ${db.name} at ${db.host}:${db.port}`)
+})
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+
+
 
 app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({ extended: true }))
