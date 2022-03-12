@@ -1,0 +1,22 @@
+body{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    margin: 0px;
+    height: 100vh;
+}
+#signups{
+    display: flex;
+    flex-flow: row wrap;
+}
+.option{
+    background-color: white;
+    padding: 2vh 2vw;
+    margin: 2vh 2vw;
+    border: 1px solid black;
+}
+.option:hover{
+    background-color: black;
+    color: white;
+}

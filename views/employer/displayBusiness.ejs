@@ -7,15 +7,9 @@
         <!-- <link rel="stylesheet" href="/style.css"> -->
     </head>
     <body>
-        <h1>Info</h1>
-        <!-- ideally we only show the logged in businesses info -->
-        <% for (var i=0; i< businesses.length; i++) {%>
-            <h2>Company Name: <%= businesses[i].CompanyName %></h2> <br>
-            <span>Number of Employees: <%= businesses[i].employeesNum%></span> <br>
-            <span>Manager: <%= businesses[i].managerName%></span> <br>
-            <span>Role: <%= businesses[i].role%></span><br>
-            <span>phone No.: <%= businesses[i].phoneNum%></span>
-        <%} %>
+        <h1>Welcome <%= business.CompanyName %>,</h1>
+        <span>Number of Employees: <%= business.NumberOfEmp %></span> <br>
+        <span>Business Email: <%= business.BusinessEmail %></span>
 
     </body>
 </html>

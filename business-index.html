@@ -1,20 +1,50 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link type="text/css" rel="stylesheet"  href="/css/signupStyle.css">
         <title>
             Business Create Account
         </title>
         <!-- <link rel="stylesheet" href="/style.css"> -->
     </head>
     <body>
-        <h1>Create a new Account</h1>
-        <form id="form" action="/bizCreateAcc" method="POST">
-            <input type="text" placeholder="Enter Company Name" name="CompanyName">
-            <input type="text" placeholder="Number of Employees" name="employeesNum">
-            <input type="text" Placeholder="Manager First & Last Name" name="managerName" >
-            <input type="text" placeholder="Role in hiring process" name="role" >
-            <input type="text" placeholder="###-###-####" name="phoneNum" >
-            <button type="submit">Create Account</button>
+        <h1 class="signupHeader">Create a new Account</h1>
+        <form class="signupForm" action="/bizCreateAcc" method="POST">
+            <div class="formInputGroup">
+                <label  for="CompanyName">Enter Company Name:</label>
+                <input class="formInput" type="text" placeholder="Ex: Company Name" name="CompanyName">
+            </div>
+
+            <div class="formInputGroup">
+                <label for="BusinessEmail">Enter Company Email:</label>
+                <input class="formInput" type="text" placeholder="Ex: example@email.com" name="BusinessEmail">
+            </div>
+
+            <div class="formInputGroup">
+                <label for="Password">Enter password:</label>
+                <input class="formInput" type="text" placeholder="Ex: password" name="Password">   
+            </div>
+
+            <div class="formInputGroup">
+                <label for="NumberOfEmp">Number of Employees:</label>
+                <input class="formInput" type="text" placeholder="Ex: 100" name="NumberOfEmp">
+            </div>
+
+            <div class="formInputGroup">
+                <label for="managerName">Manager First & Last Name:</label>
+                <input class="formInput" type="text" Placeholder="Ex:FirstName LastName" name="managerName" >
+            </div>
+
+            <div class="formInputGroup">
+                <label for="Role">Role in hiring process:</label>
+                <input class="formInput" type="text" placeholder="Ex: Lead Hr" name="Role" >
+            </div>
+
+            <div class="formInputGroup">
+                <label for="phoneNum">Business Phone Number:</label>
+                <input class="formInput" type="text" placeholder="###-###-####" name="phoneNum" >
+            </div>            
+            <button class="submitBtn" type="submit">Create Account</button>
         </form>
 
     </body>

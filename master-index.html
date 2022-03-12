@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <base href="/">
         <script lang="text/javascript" src="/server.js" defer></script>
+        <link type="text/css" rel="stylesheet"  href="/css/loginStyle.css">
         <title>
             Choose Your Account Type
         </title>
+         
         <!-- <link rel="stylesheet" href="/style.css"> -->
     </head>
     <body>
-        <form action = "/candidate_signup">
-            <input type ="submit" value = "I'm looking for a job" />
-        </form>
-        <form action = "/business_signup">
-            <input type ="submit" value = "I'm looking for an employee" />
-        </form>
-        <form action = "/hr_signup">
-            <input type ="submit" value = "I'm an HR" />
-        </form>
+        <h1>Reinforcements</h1>
+        <div id="signups">
+            <form action = "/candidate_signup">
+                <input class="option" type ="submit" value = "I'm looking for a job" />
+            </form>
+            <form action = "/business_signup">
+                <input class="option" type ="submit" value = "I'm looking for an employee" />
+            </form>
+            <form action = "/hr_signup">
+                <input class="option" type ="submit" value = "I'm HR" />
+            </form>
+        </div>
+        
         <!-- <button onclick = "business_signup(event)">I'm looking for an employee </button>
         <button onclick = "hr_signup(event)">I'm an HR </button> -->
     </body>
