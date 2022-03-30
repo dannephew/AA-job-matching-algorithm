@@ -9,9 +9,25 @@
     <body>
         <h1  class="signupHeader" >Create a new Account</h1>
         <!-- update action to one that create a candidate account -->
-        <form class="signupForm" action="/bizCreateAcc" method="POST">
+        <form class="signupForm" action="/candCreateAcc" method="POST">
 
             <span>add form inputs here</span>
+
+            <div class="formInputGroup">
+                <label for="CandidateName">Enter Candidate Name:</label>
+                <input class="formInput" type="text" placeholder="Ex: Name" name="CandidateName">
+            </div>
+
+            <div class="formInputGroup">
+                <label for="Email">Enter Candidate Email:</label>
+                <input class="formInput" type="text" placeholder="Ex: example@email.com" name="CandidateEmail">
+            </div>
+
+            <div class="formInputGroup">
+                <label for="Password">Enter password:</label>
+                <input class="formInput" type="text" placeholder="Ex: password" name="Password">
+            </div>
+            
             <button  class="submitBtn" type="submit">Create Account</button>
         </form>
 

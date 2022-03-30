@@ -1,4 +1,7 @@
+// Require models
 var Business = require('./models/business');
+var Candidate = require('./models/candidate');
+
 const express = require('express');
 const bodyParser= require('body-parser')
 const MongoClient = require('mongodb').MongoClient;
@@ -52,6 +55,29 @@ app.post('/bizCreateAcc', (req, res) =>{
       )
 
   })
+
+// NEED TO TEST
+app.post('/candCreateAcc', (req, res) =>{
+  var newCandidate = new Candidate();
+  newCandidate.CandidateName = req.body.CandidateName;
+  newCandidate.Email = req.body.Email;
+  newCandidate.Password = req.body.Password;
+
+  // Save Candidate object to Candidate collection database
+  newCandidate.save().then(savedCandidate => {
+    console.log('saved new candidate', savedCandidate)
+    console.log('its id', savedCandidate.id)
+
+    // get the id for the candidate we added to the db and send the id to /??? to display it to users
+    var string = encodeURIComponent(savedCandidate.id)
+    res.redirect('/businessInfo/'+string)
+  }
+  ).catch(err =>
+      console.log('something went wrong when saving new candidate:', err)
+    )
+
+})
+
 //given a business id, shows account info
   app.get('/businessInfo/:id', (req, res) => {
     //we can acesses the id passed to /businessInfo through req.params.id
@@ -63,6 +89,17 @@ app.post('/bizCreateAcc', (req, res) =>{
         console.log('result', result)
         // when id is found in database, send the business account we found to displayBusiness so it can display the business information
         res.render('./employer/displayBusiness.ejs', {business: result})
+      })
+  })
+
+  // NEED TO TEST
+  //given a candidate id, shows account info
+  app.get('/candidateInfo/:id', (req, res) => {
+    var givenObjectId = (req.params.id).toString() // turning it from int->string
+    console.log('given id: ', givenObjectId)
+    db.collections.BusinessCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
+        console.log('result', result)
+        res.render('./employee/displayCandidate.ejs', {candidate: result})
       })
   })
 
