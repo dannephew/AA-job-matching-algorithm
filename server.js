@@ -70,7 +70,7 @@ app.post('/candCreateAcc', (req, res) =>{
 
     // get the id for the candidate we added to the db and send the id to /??? to display it to users
     var string = encodeURIComponent(savedCandidate.id)
-    res.redirect('/businessInfo/'+string)
+    res.redirect('/candidateInfo/'+string)
   }
   ).catch(err =>
       console.log('something went wrong when saving new candidate:', err)
@@ -97,7 +97,7 @@ app.post('/candCreateAcc', (req, res) =>{
   app.get('/candidateInfo/:id', (req, res) => {
     var givenObjectId = (req.params.id).toString() // turning it from int->string
     console.log('given id: ', givenObjectId)
-    db.collections.BusinessCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
+    db.collections.CandidateCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
         console.log('result', result)
         res.render('./employee/displayCandidate.ejs', {candidate: result})
       })
