@@ -7,9 +7,22 @@
         <!-- <link rel="stylesheet" href="/style.css"> -->
     </head>
     <body>
-        <h1>Welcome <%= business.CompanyName %>,</h1>
-        <span>Number of Employees: <%= business.NumberOfEmp %></span> <br>
-        <span>Business Email: <%= business.BusinessEmail %></span>
+        <header>
+            <span>Home</span>
+            <span>View Account</span>
+        </header>
+        <section class="top">
+            <h2>Welcome <%= business.CompanyName %></h2>
+            <button>add roster</button>
+
+
+
+        </section>
+        <section class="matches">
+            <h3>Your matches</h3>
+            <span>loading your matches</span>
+
+        </section>
 
     </body>
 </html>
