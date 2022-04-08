@@ -1,0 +1,51 @@
+.matchSection{
+    display: flex;
+    flex-flow: column nowrap;
+}
+.matchSection h3{
+    font-size: 4vh;
+    margin: 1vh 0;
+}
+.matches{
+    display: flex;
+    flex-flow: column nowrap;
+}
+.match{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 8px 8px #aaa;
+   
+    padding: 1vh 1vw;
+    margin: 1vh 1vw;
+
+}
+.fa-user{
+    font-size: 20vw;
+}
+.fa-calendar{
+    font-size: 20vw;
+}
+.match h4{
+    font-size: 3.2vh;
+    margin: 0;
+}
+.match span{
+    font-size: 3vh;
+}
+.matchText{
+    display: flex;
+    flex-flow: column nowrap;
+}
+.matchCalander{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+.matchCalander span{
+    font-size: 2.5vh;
+    
+}
+.matchCalander span:hover{
+    text-decoration: underline;
+}
