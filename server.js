@@ -6,7 +6,7 @@ const express = require('express');
 const bodyParser= require('body-parser')
 const MongoClient = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
-const { restart } = require('nodemon');
+//const { restart } = require('nodemon');
 const business = require('./models/business');
 var ObjectId = require('mongodb').ObjectId
 const app = express();
@@ -26,7 +26,7 @@ app.set('view engine', 'ejs')
 app.use(express.static(__dirname));
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.listen(3000 || process.env.PORT, function() {
+app.listen(process.env.PORT || 3000, function() {
     console.log('listening on 3000')
   });
 
