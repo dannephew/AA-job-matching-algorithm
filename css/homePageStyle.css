@@ -37,15 +37,22 @@
     display: flex;
     flex-flow: column nowrap;
 }
-.matchCalander{
+.matchCalendar{
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
 }
-.matchCalander span{
+.matchCalendar span{
     font-size: 2.5vh;
     
 }
-.matchCalander span:hover{
+.matchCalendar span:hover{
     text-decoration: underline;
+}
+
+.rosterButton{
+    background-color: white;
+    padding: 2vh 2vw;
+    margin: 2vh 2vw;
+    border: 1px solid black;
 }
