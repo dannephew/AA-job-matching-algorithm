@@ -1,3 +1,7 @@
+* {
+    font-family: 'Questrial', sans-serif;
+}
+
 .matchSection{
     display: flex;
     flex-flow: column nowrap;
@@ -50,9 +54,33 @@
     text-decoration: underline;
 }
 
-.rosterButton{
+#options{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.buttons{
     background-color: white;
-    padding: 2vh 2vw;
-    margin: 2vh 2vw;
+    padding: 1.5vh 1vw;
+    margin: 1vh 1vw;
     border: 1px solid black;
+}
+
+.buttons:hover{
+    background-color: black;
+    color: white;
+}
+
+.postings{
+    background-color: white;
+    padding: 1vh 2vw;
+    margin: 1vh 1vw;
+    border: 1px solid black;
+    font-size: 1vw;
+}
+
+.postings:hover{
+    background-color: black;
+    color: white;
 }
