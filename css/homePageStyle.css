@@ -1,3 +1,7 @@
+* {
+    font-family: 'Questrial', sans-serif;
+}
+
 .matchSection{
     display: flex;
     flex-flow: column nowrap;
@@ -37,16 +41,16 @@
     display: flex;
     flex-flow: column nowrap;
 }
-.matchCalander{
+.matchCalendar{
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
 }
-.matchCalander span{
+.matchCalendar span{
     font-size: 2.5vh;
     
 }
-.matchCalander span:hover{
+.matchCalendar span:hover{
     text-decoration: underline;
 }
 
@@ -124,5 +128,36 @@
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+#options{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.buttons{
+    background-color: white;
+    padding: 1.5vh 1vw;
+    margin: 1vh 1vw;
+    border: 1px solid black;
+}
+
+.buttons:hover{
+    background-color: black;
+    color: white;
+}
+
+.postings{
+    background-color: white;
+    padding: 1vh 2vw;
+    margin: 1vh 1vw;
+    border: 1px solid black;
+    font-size: 1vw;
+}
+
+.postings:hover{
+    background-color: black;
+    color: white;
 }
 

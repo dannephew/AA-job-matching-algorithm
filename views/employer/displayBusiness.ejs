@@ -4,6 +4,8 @@
         <link type="text/css" rel="stylesheet"  href="/css/homePageStyle.css">
         <!-- link for icons -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+        
         <title>
             Business Account Info
         </title>
@@ -26,10 +28,24 @@
         </div>
     </div>
         <section class="top">
-            <h2>Welcome <%= business.CompanyName %></h2>
-            <button>add roster</button>
+            <h2>Welcome, <%= business.CompanyName %>!</h2>
 
+            <h2>Your Job Postings</h2>
+            <form>
+                <input class="postings" type ="submit" value = "Cashier 1" />
+            </form>
+            <form>
+                <input class="postings" type ="submit" value = "Cashier 2" />
+            </form>
 
+            <div id="options">
+                <form>
+                    <input class="buttons" type ="submit" value = "Add Job Posting" />
+                </form>
+                <form>
+                    <input class="buttons" type ="submit" value = "Add Roster" />
+                </form>
+            </div>
 
         </section>
         <section class="matchSection">
@@ -45,7 +61,7 @@
                         <span>Available to start working: 4/7/22</span>
                         
                     </section>
-                    <section class="matchCalander">
+                    <section class="matchCalendar">
                         <span>see availability</span>
                         <i class="fa-solid fa-calendar"></i>
                     </section>
