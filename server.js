@@ -107,6 +107,9 @@ app.post('/candCreateAcc', (req, res) =>{
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/master-index.html')
 })
+app.get('/roster', (req, res) => {
+  res.render('./Employer/rosterCalander.ejs')
+})
 //function to send you to candidate signup 
 app.get('/candidate_signup', (req, res) => {
   res.sendFile(__dirname + '/candidate-index.html')
