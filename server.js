@@ -92,7 +92,6 @@ app.post('/candCreateAcc', (req, res) =>{
       })
   })
 
-  // NEED TO TEST
   //given a candidate id, shows account info
   app.get('/candidateInfo/:id', (req, res) => {
     var givenObjectId = (req.params.id).toString() // turning it from int->string
@@ -121,4 +120,8 @@ app.get('/business_signup', (req, res) => {
 //function to send you to hr signup
 app.get('/hr_signup', (req, res) => {
   res.sendFile(__dirname + '/hr-index.html')
+})
+//function to send you to roster creation
+app.get('/roster_creation', (req, res) => {
+  res.render('./employer/roster')
 })

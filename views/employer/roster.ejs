@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link type="text/css" rel="stylesheet"  href="/css/roster.css">
+        <!-- link for icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+        
+        <title>
+            Create Roster
+        </title>
+    </head>
+    <body>
+        
+        <nav class="navbar">
+            <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>         
+            <div class="dropdown">
+                <button class="dropbtn">
+                    Profile
+                    <i class="fa fa-caret-down"> </i><i class="fa fa-fw fa-user"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
+            </div>
+        </nav>
+        <section class="top">            
+            <h2>Create A New Roster</h2>
+        </section>
+
+        <!-- change action="/bizCreateAcc" to something else?  -->
+        <form class="signupForm" action="/bizCreateAcc" method="POST">
+            <div class="formInputGroup">
+                <label  for="JobTitle">Job Title: </label>
+                <input class="formInput" type="text" placeholder="Ex: Cashier" name="JobTitle">
+            </div>
+            <div class="formInputGroup">
+                <label  for="JobDesc">Job Description: </label>
+                <input class="formInput" type="text" placeholder="Ex: " name="JobDesc">
+            </div>
+
+        </form>
+            
+
+    </body>
+</html>
