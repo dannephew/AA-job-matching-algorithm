@@ -109,7 +109,7 @@ app.post('/candCreateAcc', (req, res) =>{
     var newRoster = new Roster();
     newRoster.BusinessID = req.body.CandidateName;
     
-    db.collections.BusinessCollection.findOne({name: ObjectId(givenObjectId)}).then(result =>{
+    db.collections.BusinessCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
       console.log('result', result)
       res.render('./employee/displayCandidate.ejs', {candidate: result})
     })
@@ -151,8 +151,8 @@ app.get('/hr_signup', (req, res) => {
 app.get('/roster_creation/:id', (req, res) => {
   var givenObjectId = (req.params.id).toString() // turning it from int->string
   console.log('given id: ', givenObjectId)
-  db.collections.BusinessCollection.findOne({name: ObjectId(givenObjectId)}).then(result =>{
-    console.log('result', result)
+  db.collections.BusinessCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
+    console.log('roster result', result)
     res.render('./employer/roster', {business: result})
   })
 
