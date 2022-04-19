@@ -3,6 +3,7 @@ var BusinessSchema = new mongoose.Schema({
     CompanyName: {
         type: String,
         // required: true,
+        // needs to be unique
     },
     NumberOfEmp: {
         type: Number,

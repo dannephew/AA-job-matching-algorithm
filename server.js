@@ -82,6 +82,7 @@ app.post('/candCreateAcc', (req, res) =>{
   app.get('/businessInfo/:id', (req, res) => {
     //we can acesses the id passed to /businessInfo through req.params.id
     var givenObjectId = (req.params.id).toString() // turning it from int->string
+
     console.log('given id: ', givenObjectId)
     
     //once we got the id passed to this function, search the database for that id
@@ -100,6 +101,31 @@ app.post('/candCreateAcc', (req, res) =>{
         console.log('result', result)
         res.render('./employee/displayCandidate.ejs', {candidate: result})
       })
+  })
+
+
+  //adding job roster to db
+  app.post('/submitRoster', (req, res) =>{
+    var newRoster = new Roster();
+    newRoster.BusinessID = req.body.CandidateName;
+    
+    db.collections.BusinessCollection.findOne({name: ObjectId(givenObjectId)}).then(result =>{
+      console.log('result', result)
+      res.render('./employee/displayCandidate.ejs', {candidate: result})
+    })
+    // Save Candidate object to Candidate collection database
+    newRoster.save().then(savedCandidate => {
+      console.log('saved new candidate', savedCandidate)
+      console.log('its id', savedCandidate.id)
+  
+      // get the id for the candidate we added to the db and send the id to /??? to display it to users
+      var string = encodeURIComponent(savedCandidate.id)
+      res.redirect('/candidateInfo/'+string)
+    }
+    ).catch(err =>
+        console.log('something went wrong when saving new candidate:', err)
+      )
+  
   })
 
 //function to send you to homepage
@@ -122,6 +148,13 @@ app.get('/hr_signup', (req, res) => {
   res.sendFile(__dirname + '/hr-index.html')
 })
 //function to send you to roster creation
-app.get('/roster_creation', (req, res) => {
-  res.render('./employer/roster')
+app.get('/roster_creation/:id', (req, res) => {
+  var givenObjectId = (req.params.id).toString() // turning it from int->string
+  console.log('given id: ', givenObjectId)
+  db.collections.BusinessCollection.findOne({name: ObjectId(givenObjectId)}).then(result =>{
+    console.log('result', result)
+    res.render('./employer/roster', {business: result})
+  })
+
+  
 })
