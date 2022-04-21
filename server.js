@@ -1,6 +1,7 @@
 // Require models
 var Business = require('./models/business');
 var Candidate = require('./models/candidate');
+var Roster = require('./models/roster');
 
 const express = require('express');
 const bodyParser= require('body-parser')
@@ -107,26 +108,46 @@ app.post('/candCreateAcc', (req, res) =>{
   //adding job roster to db
   app.post('/submitRoster', (req, res) =>{
     var newRoster = new Roster();
-    newRoster.BusinessID = req.body.CandidateName;
-    
-    db.collections.BusinessCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
-      console.log('result', result)
-      res.render('./employee/displayCandidate.ejs', {candidate: result})
-    })
+    newRoster.BusinessId = req.body.BusinessId;
+    newRoster.BusinessName = req.body.BusinessName;
+    newRoster.JobTitle = req.body.JobTitle;
+    newRoster.Hours = req.body.Hours;
+
+    // db.collections.BusinessCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
+    //   console.log('result', result)
+    //   res.render('./employee/displayCandidate.ejs', {candidate: result})
+    // })
     // Save Candidate object to Candidate collection database
-    newRoster.save().then(savedCandidate => {
-      console.log('saved new candidate', savedCandidate)
-      console.log('its id', savedCandidate.id)
+    newRoster.save().then(savedRoster => {
+      // console.log('saved new candidate', savedCandidate)
+      // console.log('its id', savedCandidate.id)
   
       // get the id for the candidate we added to the db and send the id to /??? to display it to users
-      var string = encodeURIComponent(savedCandidate.id)
-      res.redirect('/candidateInfo/'+string)
+      var string = encodeURIComponent(savedRoster.id)
+      res.redirect('/rosterInfo/'+string)
     }
     ).catch(err =>
-        console.log('something went wrong when saving new candidate:', err)
+        console.log('something went wrong when saving new roster:', err)
       )
   
   })
+
+
+  //given a business id, shows account info
+  app.get('/rosterInfo/:id', (req, res) => {
+    //we can acesses the id passed to /businessInfo through req.params.id
+    var givenObjectId = (req.params.id).toString() // turning it from int->string
+
+    console.log('given id: ', givenObjectId)
+    
+    //once we got the id passed to this function, search the database for that id
+    db.collections.BusinessCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
+        console.log('result', result)
+        // when id is found in database, send the business account we found to displayBusiness so it can display the business information
+        res.render('./employer/displayBusiness.ejs', {business: result})
+      })
+  })
+
 
 //function to send you to homepage
 app.get('/', (req, res) => {
@@ -151,10 +172,8 @@ app.get('/hr_signup', (req, res) => {
 app.get('/roster_creation/:id', (req, res) => {
   var givenObjectId = (req.params.id).toString() // turning it from int->string
   console.log('given id: ', givenObjectId)
-  db.collections.BusinessCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
+  db.collections.RosterCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
     console.log('roster result', result)
-    res.render('./employer/roster', {business: result})
-  })
-
-  
+    res.render('./employer/displayRoster.ejs', {roster: result})
+  })  
 })
