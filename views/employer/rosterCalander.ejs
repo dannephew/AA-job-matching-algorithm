@@ -9,7 +9,18 @@
         console.log('function is running')
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'timeGridWeek'
+          initialView: 'timeGridWeek',
+          selectable: true,
+          editable: true,
+          select: function(info) {
+           /*alert('selected ' + info.startStr + ' to ' + info.endStr);*/
+             calendar.addEvent({
+                title: 'availability',
+                start: info.startStr,
+                end: info.endStr
+            })
+          },
+          events: []
         });
         calendar.render();
       });
