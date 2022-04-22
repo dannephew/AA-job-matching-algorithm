@@ -1,47 +1,127 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link type="text/css" rel="stylesheet"  href="/css/roster.css">
-        <!-- link for icons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
-        
-        <title>
-            Create Roster
-        </title>
-    </head>
-    <body>
-        
-        <nav class="navbar">
-            <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>         
-            <div class="dropdown">
-                <button class="dropbtn">
-                    Profile
-                    <i class="fa fa-caret-down"> </i><i class="fa fa-fw fa-user"></i>
-                </button>
-                <div class="dropdown-content">
-                    <a href="#">Link 1</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
-                </div>
-            </div>
-        </nav>
-        <section class="top">            
-            <h2>Create A New Roster</h2>
-        </section>
+  <head>
+    <link type="text/css" rel="stylesheet" href="/css/roster.css" />
+    <!-- link for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Questrial&display=swap"
+      rel="stylesheet"
+    />
 
-        <form class="signupForm" action="/submitRoster" method="POST">
-            <div class="formInputGroup">
-                <label  for="JobTitle">Job Title: </label>
-                <input class="formInput" type="text" placeholder="Ex: Cashier" name="JobTitle">
-            </div>
-            <div class="formInputGroup">
-                <label  for="JobDesc">Job Description: </label>
-                <input class="formInput" type="text" placeholder="Ex: " name="JobDesc">
-            </div>
+    <title>Create Roster</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
+      <div class="dropdown">
+        <button class="dropbtn">
+          Profile
+          <i class="fa fa-caret-down"> </i><i class="fa fa-fw fa-user"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
+        </div>
+      </div>
+    </nav>
+    <section class="top">
+      <h2>Create A New Roster</h2>
+    </section>
 
-        </form>
-            
+    <form class="signupForm" action="/submitRoster" method="POST">
+      <div class="formInputGroup">
+        <label for="JobTitle">Job Title: </label>
+        <input
+          class="formInput"
+          type="text"
+          placeholder="Ex: Cashier"
+          name="JobTitle"
+        />
+      </div>
+      <div class="formInputGroup">
+        <label for="JobDesc">Job Description: </label>
+        <input
+          class="formInput"
+          type="text"
+          placeholder="Ex: "
+          name="JobDesc"
+        />
+      </div>
 
-    </body>
+      <div class="formInputGroup">
+        <label for="JobSkills">Skills Required: </label>
+        <input class="formInput" type="text" placeholder="Ex: Bartending" />
+      </div>
+
+      <div class="formInputGroup">
+        <label for="Location">Location: </label>
+
+        <div class="radioForm">
+          <lable class="locationRadio">
+            <input class="formInput" type="radio" value="One Location" />One
+            Location
+          </lable>
+
+          <lable class="locationRadio">
+            <input
+              class="formInput"
+              type="radio"
+              value="Multiple Locations"
+            />Multiple Locations
+          </lable>
+
+          <lable class="locationRadio">
+            <input class="formInput" type="radio" value="Remote" />Remote
+          </lable>
+
+          <lable class="locationRadio">
+            <input class="formInput" type="radio" value="Road" />On The Road
+          </lable>
+        </div>
+      </div>
+
+      <div class="formInputGroup additionalInfo">
+        <input
+          class="formInput"
+          type="text"
+          placeholder="Additional Info"
+          name="LocationInfo"
+        />
+      </div>
+
+      <div class="formInputGroup">
+        <label for="Job Commitment">Job Commitment: </label>
+
+        <div class="radioForm">
+          <lable class="commitRadio">
+            <input class="formInput" type="radio" value="fullTime" />
+            Full-time
+          </lable>
+
+          <lable class="commitRadio">
+            <input class="formInput" type="radio" value="partTime" />
+            Part-time
+          </lable>
+
+          <lable class="commitRadio">
+            <input class="formInput" type="radio" value="flexible" />
+            Flexible
+          </lable>
+
+      </div>
+
+
+      <button class="submitBtn" type="submit">Next</button>
+
+
+    </form>
+  </body>
 </html>
