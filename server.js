@@ -132,7 +132,7 @@ app.post('/candCreateAcc', (req, res) =>{
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/master-index.html')
 })
-app.get('/roster', (req, res) => {
+app.get('/roster_calander', (req, res) => {
   res.render('./Employer/rosterCalander.ejs')
 })
 //function to send you to candidate signup 
@@ -153,7 +153,7 @@ app.get('/roster_creation/:id', (req, res) => {
   console.log('given id: ', givenObjectId)
   db.collections.BusinessCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
     console.log('roster result', result)
-    res.render('./employer/roster', {business: result})
+    res.render('./employer/firstRosterPage', {business: result})
   })
 
   

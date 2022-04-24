@@ -55,6 +55,7 @@ body {
 .dropdown {
   float: left;
   overflow: hidden;
+  margin-right: 2vw;
 }
 
 /* Dropdown button */
@@ -120,4 +121,29 @@ body {
   text-align: center;
   align-items: flex-start;
   width: 50%;
+}
+#calendar{
+  width:80%;
+  margin:auto;
+}
+.submitHrs {
+  
+  margin: 2vh 2vw;
+  padding: 2vh 0vw;
+  background-color: white;
+  border: 1px solid black;
+  text-align: center;
+  justify-content: center;
+  width:10vw;
+}
+.submitHrs:hover{
+  background-color: black;
+  color:white;
+}
+.calMain{
+  display: flex;
+  flex-flow:column nowrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5vh;
 }
