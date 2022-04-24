@@ -155,6 +155,15 @@ app.get('/roster_creation/:id', (req, res) => {
     console.log('roster result', result)
     res.render('./employer/firstRosterPage', {business: result})
   })
+})
+
+  app.get('/roster_creation/2/:id', (req, res) => {
+    var givenObjectId = (req.params.id).toString() // turning it from int->string
+    console.log('given id: ', givenObjectId)
+    db.collections.BusinessCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
+      console.log('roster result', result)
+      res.render('./employer/secondRosterPage', {business: result})
+    })
 
   
 })
