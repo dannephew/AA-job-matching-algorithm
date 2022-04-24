@@ -1,33 +1,56 @@
-<html lang='en'>
+<html lang="en">
   <head>
-    <meta charset='utf-8' />
+    <meta charset="utf-8" />
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.3.0/main.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.css"
+    />
+    <link type="text/css" rel="stylesheet" href="/css/roster.css" />
     <script>
-
-      document.addEventListener('DOMContentLoaded', function() {
-        console.log('function is running')
-        var calendarEl = document.getElementById('calendar');
+      document.addEventListener("DOMContentLoaded", function () {
+        console.log("function is running");
+        var calendarEl = document.getElementById("calendar");
         var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'timeGridWeek',
+          initialView: "timeGridWeek",
+          headerToolbar: false,
           selectable: true,
           editable: true,
-          select: function(info) {
-           /*alert('selected ' + info.startStr + ' to ' + info.endStr);*/
-             calendar.addEvent({
-                title: 'availability',
-                start: info.startStr,
-                end: info.endStr
-            })
+          select: function (info) {
+            alert("selected " + info.startStr + " to " + info.endStr);
+            calendar.addEvent({
+              title: "availability",
+              start: info.startStr,
+              end: info.endStr,
+            });
           },
-          events: []
+          events: [],
+          allDaySlot: false,
+          height: 480
         });
         calendar.render();
       });
-
     </script>
   </head>
   <body>
-    <div id='calendar'>show calander here</div>
+    <nav class="navbar">
+      <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
+      <div class="dropdown">
+        <button class="dropbtn">
+          Profile
+          <i class="fa fa-caret-down"> </i><i class="fa fa-fw fa-user"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
+        </div>
+      </div>
+    </nav>
+    <div class="calMain">
+      <h2>Enter needed availability for roster</h2>
+      <div id="calendar"></div>
+      <button class="submitHrs">Submit Hours</button>
+    </div>
   </body>
 </html>
