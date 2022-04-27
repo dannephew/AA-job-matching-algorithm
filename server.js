@@ -133,7 +133,7 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/master-index.html')
 })
 app.get('/roster_calander', (req, res) => {
-  res.render('./Employer/rosterCalander.ejs')
+  res.render('./employer/rosterCalander.ejs')
 })
 //function to send you to candidate signup 
 app.get('/candidate_signup', (req, res) => {
