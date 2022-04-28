@@ -174,7 +174,6 @@ app.get('/roster_creation/:id', (req, res) => {
   console.log('given id: ', givenObjectId)
   db.collections.RosterCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
     console.log('roster result', result)
-
     res.render('./employer/firstRosterPage', {business: result})
   })
 })
@@ -188,4 +187,5 @@ app.get('/roster_creation/:id', (req, res) => {
     })
 
   
+
 })
