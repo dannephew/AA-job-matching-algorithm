@@ -179,6 +179,7 @@ app.get('/roster_creation/:id', (req, res) => {
 })
 
   app.get('/roster_creation/2/:id', (req, res) => {
+    console.log("heyyyyyy");
     var givenObjectId = (req.params.id).toString() // turning it from int->string
     console.log('given id: ', givenObjectId)
     db.collections.BusinessCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
