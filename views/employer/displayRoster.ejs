@@ -36,7 +36,8 @@
                 <!-- <form action="/roster_creation/"+ {{ business._id }}>
                     <input class="buttons" type ="submit" value = "Add Roster" />
                 </form> -->
-                <a href="/roster_creation/<%= business._id %>">Add Roster</a>
+                <!-- <a href="/roster_creation/<>">Add Roster</a>  -->
+                <!-- %= business._id % was inside the <> -->
             </div>
 
         </section>
@@ -45,6 +46,14 @@
             <section class="matches">
                 <section class="match">
                     <i class="fa-solid fa-user"></i>
+                    <p>Job title: <%= roster.JobTitle %></p>
+                    <p>Job Description: <%= roster.JobDesc %></p>
+                    <p>Skills: <%= roster.Skills %></p>
+                    <p>Location: <%= roster.Location[0] %></p>
+                    <p> Additional Info: <%= roster.Location[1] %></p>
+                    <p> Commitment: <%= roster.Commitment %></p>
+                    <p> Job Schedule: <%= roster.JobSchedule %></p>
+                    <p> Desired Start Date: <%= roster.DesiredStart %></p>
                     <section class="matchCalendar">
                         <span>see availability</span>
                         <i class="fa-solid fa-calendar"></i>

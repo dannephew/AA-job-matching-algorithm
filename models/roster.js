@@ -11,6 +11,24 @@ var RosterSchema = new mongoose.Schema({
     JobTitle: {
         type: String
     },
+    JobDesc:{
+        type: String
+    },
+    Skills:{
+        type: String
+    },
+    Location:{
+        type: Array
+    },
+    Commitment:{
+        type: String
+    },
+    JobSchedule:{
+        type: String
+    },
+    DesiredStart:{
+        type: String
+    },
     Hours: {
         type: String
     }

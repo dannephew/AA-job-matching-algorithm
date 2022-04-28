@@ -36,7 +36,7 @@
       <h2>Create A New Roster</h2>
     </section>
 
-    <form class="signupForm" action="/submitRoster" method="POST">
+    <form class="signupForm" action="/submitRoster/<%= roster._id %>" method="POST">
       <div class="formInputGroup">
         <label for="JobTitle">Job Schedule: </label>
         <div class="radioForm">
@@ -46,15 +46,16 @@
                 class="formInput"
                 type="radio"
                 value="Weekend"
+                name="jobSchedule"
               />Weekend
             </span>
 
             <span class="locationRadio">
-              <input class="formInput" type="radio" value="DayShift" />Day Shift
+              <input class="formInput" type="radio" value="DayShift" name="jobSchedule"/>Day Shift
             </span>
   
             <span class="locationRadio">
-              <input class="formInput" type="radio" value="Road" />Flexible
+              <input class="formInput" type="radio" value="Road" name="jobSchedule"/>Flexible
             </span>
 
             <button class="fillouthrs" type="submit">Fill Out Work Hours</button>
@@ -69,31 +70,13 @@
         <input
           class="formInput"
           type="text"
-          placeholder="Ex: "
-          name="JobDesc"
+          placeholder="Ex: June 20"
+          name="desiredStart"
         />
       </div>
 
-      <div class="formInputGroup">
-        <label for="JobSkills">Skills Required: </label>
-        <input class="formInput" type="text" placeholder="Ex: Bartending" />
-      </div>
-
-      <div class="formInputGroup">
-        <label for="Location">Location: </label>
-
-        
-
-      <div class="formInputGroup additionalInfo">
-        <input
-          class="formInput"
-          type="text"
-          placeholder="Additional Info"
-          name="LocationInfo"
-        />
-      </div>
-
-      <button class="submitBtn" type="submit">Next</button>
+      <button class="submitBtn" type="submit">Submit Roster</button>
+      <!-- Might actually be a next button if more fields added -->
 
       <div class="formInputGroup">
         <label for="Job Schedule">Job Schedule: </label>

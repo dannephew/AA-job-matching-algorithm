@@ -106,34 +106,33 @@ app.post('/candCreateAcc', (req, res) =>{
 
 
   //adding job roster to db
-  app.post('/submitRoster', (req, res) =>{
-    var newRoster = new Roster();
-    newRoster.BusinessId = req.body.BusinessId;
-    newRoster.BusinessName = req.body.BusinessName;
-    newRoster.JobTitle = req.body.JobTitle;
-    newRoster.Hours = req.body.Hours;
+  app.post('/submitRoster/:id', (req, res) =>{
+    //var newRoster = new Roster();
+    var givenObjectId = (req.params.id).toString() // turning it from int->string
+    console.log('givenObjectId (Roster): ', givenObjectId)
+    
+    /*
+    db.collections.BusinessCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
+      console.log('business result', result)
+      
+      newRoster.BusinessId = result._id;
+      newRoster.BusinessName = result.CompanyName;
+      newRoster.JobTitle = req.body.JobTitle;
+      newRoster.Hours = req.body.Hours;
+    })*/
 
-    // db.collections.BusinessCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
-    //   console.log('result', result)
-    //   res.render('./employee/displayCandidate.ejs', {candidate: result})
-    // })
-    // Save Candidate object to Candidate collection database
-    newRoster.save().then(savedRoster => {
-      // console.log('saved new candidate', savedCandidate)
-      // console.log('its id', savedCandidate.id)
-  
-      // get the id for the candidate we added to the db and send the id to /??? to display it to users
-      var string = encodeURIComponent(savedRoster.id)
-      res.redirect('/rosterInfo/'+string)
-    }
-    ).catch(err =>
-        console.log('something went wrong when saving new roster:', err)
-      )
-  
+    // Save Roster object to Roster collection database
+    db.collections.RosterCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
+      console.log('Roster result plz', result)
+      result.JobSchedule = req.body.jobSchedule;
+      // Note: Didn't store info from "Fill Out Work Hours" button
+      result.DesiredStart = req.body.desiredStart;
+      res.render('./employer/displayRoster', {roster: result})
   })
+})
 
 
-  //given a business id, shows account info
+  //given a business id, shows roster info
   app.get('/rosterInfo/:id', (req, res) => {
     //we can acesses the id passed to /businessInfo through req.params.id
     var givenObjectId = (req.params.id).toString() // turning it from int->string
@@ -178,15 +177,49 @@ app.get('/roster_creation/:id', (req, res) => {
   })
 })
 
-  app.get('/roster_creation/2/:id', (req, res) => {
-    console.log("heyyyyyy");
+  app.post('/roster_creation/2/:id', (req, res) => {
     var givenObjectId = (req.params.id).toString() // turning it from int->string
     console.log('given id: ', givenObjectId)
+    var newRoster = new Roster();
     db.collections.BusinessCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
-      console.log('roster result', result)
-      res.render('./employer/secondRosterPage', {business: result})
+      console.log('business result', result)
+      newRoster.BusinessId = result._id;
+      newRoster.BusinessName = result.CompanyName;
+      newRoster.JobTitle = req.body.JobTitle;
+      newRoster.JobDesc = req.body.Desc;
+      newRoster.Skills = req.body.Skills;
+      newRoster.Location = [req.body.location, req.body.locationInfo];
+      newRoster.Commitment = req.body.commitment;
+      //res.render('./employer/secondRosterPage', {roster: newRoster})
+      // Save Roster object to database
+      newRoster.save().then(savedRoster => {
+        console.log('displayRoster loaded')
+        console.log('SAVEDROSTER: ', savedRoster)
+        res.render('./employer/secondRosterPage', {roster: savedRoster})
+      }
+      ).catch(err =>
+          console.log('something went wrong when saving new roster:', err)
+        )
     })
 
-  
+    
+  })
+    // Don't need bc business id saved in roster
+    // db.collections.BusinessCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
+    //   console.log('business result', result)
+    //   res.render('./employer/secondRosterPage', {business: result})
+    // })
 
+app.get('/display_roster/:id', (req, res) => {
+
+  var givenObjectId = (req.params.id).toString() // turning it from int->string
+    console.log('given id: ', givenObjectId)
+
+    db.collections.RosterCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
+      console.log('roster result', result)
+      // result.BusinessId = businessId
+      // result.BusinessName = businessResult.CompanyName
+      res.render('./employer/displayRoster', {roster: result})
+      // , business: businessResult
+    })
 })
