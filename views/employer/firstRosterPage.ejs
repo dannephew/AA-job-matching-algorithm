@@ -36,7 +36,7 @@
       <h2>Create A New Roster</h2>
     </section>
 
-    <form class="signupForm" action="/submitRoster" method="POST">
+    <form class="signupForm" action="/roster_creation/2/<%= business._id %>">
       <div class="formInputGroup">
         <label for="JobTitle">Job Title: </label>
         <input
@@ -117,9 +117,11 @@
           </lable>
 
       </div>
-
-
-      <button class="submitBtn" type="submit">Next</button>
+      <form action = "/roster_creation/2/<%= business._id %>"></form>
+      <!-- <form action = "/roster_creation/2/<%= business._id %>"> -->
+        <input class="submitBtn" type = "submit" value="Next">
+      </form>
+      
 
 
     </form>
