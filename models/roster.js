@@ -1,13 +1,35 @@
+const { ObjectId } = require('mongodb');
 var mongoose = require('mongoose');
 var RosterSchema = new mongoose.Schema({
     BusinessName: {
-        type: String,
+        type: String
         // required: true,
+    },
+    BusinessId: {
+        type: ObjectId
     },
     JobTitle: {
         type: String
     },
-    hours: {
+    JobDesc:{
+        type: String
+    },
+    Skills:{
+        type: String
+    },
+    Location:{
+        type: Array
+    },
+    Commitment:{
+        type: String
+    },
+    JobSchedule:{
+        type: String
+    },
+    DesiredStart:{
+        type: String
+    },
+    Hours: {
         type: String
     }
 

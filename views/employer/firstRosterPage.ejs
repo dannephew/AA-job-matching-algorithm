@@ -36,7 +36,7 @@
       <h2>Create A New Roster</h2>
     </section>
 
-    <form class="signupForm" action="/submitRoster" method="POST">
+    <form class="signupForm" action="/roster_creation/2/<%= business._id %>", method="POST">
       <div class="formInputGroup">
         <label for="JobTitle">Job Title: </label>
         <input
@@ -58,32 +58,52 @@
 
       <div class="formInputGroup">
         <label for="JobSkills">Skills Required: </label>
-        <input class="formInput" type="text" placeholder="Ex: Bartending" />
+        <input 
+          class="formInput" 
+          type="text" 
+          placeholder="Ex: Bartending"
+          name="Skills" 
+        />
       </div>
 
       <div class="formInputGroup">
         <label for="Location">Location: </label>
 
         <div class="radioForm">
-          <lable class="locationRadio">
-            <input class="formInput" type="radio" value="One Location" />One
-            Location
-          </lable>
+          <label class="locationRadio">
+            <input 
+            class="formInput" 
+            type="radio" 
+            value="One Location" 
+            name = "location"
+            /> One Location
+          </label>
 
           <lable class="locationRadio">
             <input
               class="formInput"
               type="radio"
               value="Multiple Locations"
+              name = "location"
             />Multiple Locations
           </lable>
 
           <lable class="locationRadio">
-            <input class="formInput" type="radio" value="Remote" />Remote
+            <input 
+              class="formInput" 
+              type="radio" 
+              value="Remote"
+              name = "location"
+            />Remote
           </lable>
 
           <lable class="locationRadio">
-            <input class="formInput" type="radio" value="Road" />On The Road
+            <input 
+              class="formInput" 
+              type="radio" 
+              value="Road" 
+              name = "location"
+            />Road
           </lable>
         </div>
       </div>
@@ -93,7 +113,7 @@
           class="formInput"
           type="text"
           placeholder="Additional Info"
-          name="LocationInfo"
+          name="locationInfo"
         />
       </div>
 
@@ -102,24 +122,26 @@
 
         <div class="radioForm">
           <lable class="commitRadio">
-            <input class="formInput" type="radio" value="fullTime" />
+            <input class="formInput" type="radio" value="fullTime" name = "commitment"/>
             Full-time
           </lable>
 
           <lable class="commitRadio">
-            <input class="formInput" type="radio" value="partTime" />
+            <input class="formInput" type="radio" value="partTime" name = "commitment"/>
             Part-time
           </lable>
 
           <lable class="commitRadio">
-            <input class="formInput" type="radio" value="flexible" />
+            <input class="formInput" type="radio" value="flexible" name = "commitment"/>
             Flexible
           </lable>
 
       </div>
-
-
-      <button class="submitBtn" type="submit">Next</button>
+      <form action = "/roster_creation/2/<%= business._id %>"></form>
+      <!-- <form action = "/roster_creation/2/<%= business._id %>"> -->
+        <input class="submitBtn" type = "submit" value="Next">
+      </form>
+      
 
 
     </form>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link type="text/css" rel="stylesheet"  href="/css/homePageStyle.css">
+        <!-- link for icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+        
+        <title>
+            Roster Info
+        </title>
+        <!-- <link rel="stylesheet" href="/style.css"> -->
+    </head>
+    <body>
+              
+    <nav class="navbar">
+        <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>         
+        <div class="dropdown">
+            <button class="dropbtn">
+                Profile
+                <i class="fa fa-caret-down"> </i><i class="fa fa-fw fa-user"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+        </div>
+    </nav>
+        <section class="top">            
+            <h2>Welcome, <%= roster.BusinessName %>!</h2>
+
+            <h2>Your Job Roster</h2>
+
+            <div id="options">
+                <!-- <form action="/roster_creation/"+ {{ business._id }}>
+                    <input class="buttons" type ="submit" value = "Add Roster" />
+                </form> -->
+                <!-- <a href="/roster_creation/<>">Add Roster</a>  -->
+                <!-- %= business._id % was inside the <> -->
+            </div>
+
+        </section>
+        <section class="matchSection">
+            <h3>Your matches</h3>
+            <section class="matches">
+                <section class="match">
+                    <i class="fa-solid fa-user"></i>
+                    <p>Job title: <%= roster.JobTitle %></p>
+                    <p>Job Description: <%= roster.JobDesc %></p>
+                    <p>Skills: <%= roster.Skills %></p>
+                    <p>Location: <%= roster.Location[0] %></p>
+                    <p> Additional Info: <%= roster.Location[1] %></p>
+                    <p> Commitment: <%= roster.Commitment %></p>
+                    <p> Job Schedule: <%= roster.JobSchedule %></p>
+                    <p> Desired Start Date: <%= roster.DesiredStart %></p>
+                    <section class="matchCalendar">
+                        <span>see availability</span>
+                        <i class="fa-solid fa-calendar"></i>
+                    </section>
+                </section>
+            </section>
+
+        </section>
+
+    </body>
+</html>
