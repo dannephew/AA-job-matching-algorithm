@@ -31,6 +31,16 @@ var RosterSchema = new mongoose.Schema({
     },
     Hours: {
         type: String
+    },
+    Compensation:{
+        type:String //should be num
+    },
+    CovidPrecautions:{
+        type: String
+    },
+    Availability:{
+        type:Array,
+        default: Date
     }
 
 })

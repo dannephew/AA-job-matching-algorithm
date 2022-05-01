@@ -17,6 +17,7 @@
 
     <title>Create Roster</title>
   </head>
+
   <body>
     <nav class="navbar">
       <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
@@ -32,38 +33,49 @@
         </div>
       </div>
     </nav>
-    <section class="top">
+    <!-- ADD MARGIN -->
+    <section class="top" >
       <h2>Create A New Roster</h2>
     </section>
-
-    <form class="signupForm" action="/submitRoster/<%= roster._id %>" method="POST">
+<!--  action="/submitRoster/<%= roster._id %>" --> 
+    <form
+      class="signupForm"
+      
+      action="/roster_creation/3/<%= roster._id %>"
+      method="POST"
+    >
       <div class="formInputGroup">
         <label for="JobTitle">Job Schedule: </label>
         <div class="radioForm">
-  
-            <span class="locationRadio">
-              <input
-                class="formInput"
-                type="radio"
-                value="Weekend"
-                name="jobSchedule"
-              />Weekend
-            </span>
+          <span class="locationRadio">
+            <input
+              class="formInput"
+              type="radio"
+              value="Weekend"
+              name="jobSchedule"
+            />Weekend
+          </span>
 
-            <span class="locationRadio">
-              <input class="formInput" type="radio" value="DayShift" name="jobSchedule"/>Day Shift
-            </span>
-  
-            <span class="locationRadio">
-              <input class="formInput" type="radio" value="Road" name="jobSchedule"/>Flexible
-            </span>
+          <span class="locationRadio">
+            <input
+              class="formInput"
+              type="radio"
+              value="DayShift"
+              name="jobSchedule"
+            />Day Shift
+          </span>
 
-            <button class="fillouthrs" type="submit">Fill Out Work Hours</button>
-
-          </div>
+          <span class="locationRadio">
+            <input
+              class="formInput"
+              type="radio"
+              value="Road"
+              name="jobSchedule"
+            />Flexible
+          </span>
+        
         </div>
       </div>
-
       <!-- Required -->
       <div class="formInputGroup">
         <label for="desiredstartdate">Desired Start Date: </label>
@@ -74,60 +86,29 @@
           name="desiredStart"
         />
       </div>
-
       <div class="formInputGroup">
-        <label for="Job Schedule">Job Schedule: </label>
+        <label for="LengthOfRole">Length of Role: </label>
 
-    <div class="radioForm">
-          <lable class="commitRadio">
-            <input class="formInput" type="radio" value="Weekend" />
-            Weekend
-          </lable>
-          
-          <lable class="commitRadio">
-            <input class="formInput" type="radio" value="Dayshift" />
-            Dayshift
-          </lable>
-
-          <lable class="commitRadio">
-            <input class="formInput" type="radio" value="Flexible" />
-            Flexible
-          </lable>
-
-    </div>
-
-      <label for="Desired Start Date">Desired Start Date: </label>
-        <input
-          class="formInput"
-          type="text"
-          placeholder="Ex: March 27th, 2003"
-          name="Desired Start Date"
-        />
-     </div>
-      <div class="formInputGroup">
-        <label for="Length of Role">Length of Role: </label>
-
-          <div class="radioForm">
+        <div class="radioForm">
           <lable class="commitRadio">
             <input class="formInput" type="radio" value="Temporarily" />
             Temporarily
           </lable>
 
-    <div class="formInputGroup Dates available">
+          <div class="formInputGroup Dates available">
             <input
-            class="formInput"
-            type="text"
-            placeholder="Dates available"
-            name="Length of Role"
+              class="formInput"
+              type="text"
+              placeholder="Dates available"
+              name="LengthOfRole"
             />
-         </div>
+          </div>
 
-         <div class="radioForm">
-          <lable class="commitRadio">
-            <input class="formInput" type="radio" value="Indefinitely" />
-            Indefinitely
-          </lable>
-
+          <div class="radioForm">
+            <lable class="commitRadio">
+              <input class="formInput" type="radio" value="Indefinitely" />
+              Indefinitely
+            </lable>
           </div>
           <label for="Compensation">Compensation: </label>
           <input
@@ -136,34 +117,31 @@
             placeholder="Ex. $15/hr"
             name="Compensation"
           />
-          
-
         </div>
-    <label for="Supplemental Pay and Benefits">Suplemental Pay and Benefits: </label>
+        <label for="SupplementalPay"
+          >Suplemental Pay and Benefits:
+        </label>
         <input
           class="formInput"
           type="text"
           placeholder="Ex. ?????"
-          name="Supplemental Pay and Benefits"
+          name="SupplementalPay"
         />
 
- <label for="COVID-19 Precautions">Suplemental COVID-19 Precautions: </label>
+        <label for="CovidPrecautions"
+          >Suplemental COVID-19 Precautions:
+        </label>
         <input
           class="formInput"
           type="text"
           placeholder="Ex. Masks are mandatory"
-          name="Covid-19 Precautions"
+          name="CovidPrecautions"
         />
         <div>
-    </div>
-    <button class="submitBtn" type="submit">Back</button> 
-    <button class="submitBtn" type="submit">Find Candidate</button>
-     </form>
-    </body>
-</html>
-
-    
-
+          <button class="submitBtn">Back</button>
+          <button class="submitBtn" type="submit">Next</button>
+        </div>
+      </div>
     </form>
   </body>
 </html>

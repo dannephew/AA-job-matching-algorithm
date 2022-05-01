@@ -1,72 +1,74 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link type="text/css" rel="stylesheet"  href="/css/homePageStyle.css">
-        <!-- link for icons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
-        
-        <title>
-            Business Account Info
-        </title>
-        <!-- <link rel="stylesheet" href="/style.css"> -->
-    </head>
-    <body>
-              
+  <head>
+    <link type="text/css" rel="stylesheet" href="/css/homePageStyle.css" />
+    <!-- link for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Questrial&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Business Account Info</title>
+    <!-- <link rel="stylesheet" href="/style.css"> -->
+  </head>
+  <body>
     <nav class="navbar">
-        <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>         
-        <div class="dropdown">
-            <button class="dropbtn">
-                Profile
-                <i class="fa fa-caret-down"> </i><i class="fa fa-fw fa-user"></i>
-            </button>
-            <div class="dropdown-content">
-                <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
-            </div>
+      <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
+      <div class="dropdown">
+        <button class="dropbtn">
+          Profile
+          <i class="fa fa-caret-down"> </i><i class="fa fa-fw fa-user"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
         </div>
+      </div>
     </nav>
-        <section class="top">            
-            <h2>Welcome, <%= business.CompanyName %>!</h2>
+    <section class="top">
+      <h2>Welcome, <%= business.CompanyName %>!</h2>
 
-            <h2>Your Job Postings</h2>
-            <form>
-                <input class="postings" type ="submit" value = "Cashier 1" />
-            </form>
-            <form>
-                <input class="postings" type ="submit" value = "Cashier 2" />
-            </form>
+      <h2>Your Job Postings</h2>
+      <form>
+        <input class="postings" type="submit" value="Cashier 1" />
+      </form>
+      <form>
+        <input class="postings" type="submit" value="Cashier 2" />
+      </form>
 
-            <div id="options">
-                <!-- <form action="/roster_creation/"+ {{ business._id }}>
-                    <input class="buttons" type ="submit" value = "Add Roster" />
-                </form> -->
-                <a href="/roster_creation/<%= business._id %>">Add Roster</a>
-            </div>
-
+      <div id="options">
+        <form action="/roster_creation/1/<%= business._id  %>" method="GET">
+          <input class="buttons" type="submit" value="Add Roster" />
+        </form>
+        <!-- <a href="/roster_creation/1/<%= business._id %>">Add Roster</a> -->
+      </div>
+    </section>
+    <section class="matchSection">
+      <h3>Your matches</h3>
+      <section class="matches">
+        <section class="match">
+          <i class="fa-solid fa-user"></i>
+          <section class="matchText">
+            <h4>John Doe</h4>
+            <span>Phone: ###-###-####</span>
+            <span>Email: email@gmail.com</span>
+            <span>Location: 2 Miles</span>
+            <span>Available to start working: 4/7/22</span>
+          </section>
+          <section class="matchCalendar">
+            <span>see availability</span>
+            <i class="fa-solid fa-calendar"></i>
+          </section>
         </section>
-        <section class="matchSection">
-            <h3>Your matches</h3>
-            <section class="matches">
-                <section class="match">
-                    <i class="fa-solid fa-user"></i>
-                    <section class="matchText">
-                        <h4>John Doe</h4>
-                        <span>Phone: ###-###-####</span>
-                        <span>Email: email@gmail.com</span>
-                        <span>Location: 2 Miles</span>
-                        <span>Available to start working: 4/7/22</span>
-                        
-                    </section>
-                    <section class="matchCalendar">
-                        <span>see availability</span>
-                        <i class="fa-solid fa-calendar"></i>
-                    </section>
-                </section>
-            </section>
-
-        </section>
-
-    </body>
+      </section>
+    </section>
+  </body>
 </html>

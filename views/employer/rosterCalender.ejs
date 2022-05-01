@@ -9,7 +9,6 @@
     <link type="text/css" rel="stylesheet" href="/css/roster.css" />
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        console.log("function is running");
         var calendarEl = document.getElementById("calendar");
         var calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: "timeGridWeek",
@@ -26,12 +25,33 @@
           },
           events: [],
           allDaySlot: false,
-          height: 480
+          height: 480,
         });
         calendar.render();
+        const button = document.getElementById("rosterSubmit");
+        button.addEventListener("click", () => {
+          var events = calendar.getEvents();
+          var formattedEvents = []
+          for (let i = 0; i < events.length; i++) {
+            var start = new Date(events[i]._instance.range.start)
+            console.log( "string" , JSON.stringify( new Date(events[i]._instance.range.start)))
+            formattedEvents.push(
+              JSON.stringify({
+              start: new Date(events[i]._instance.range.start),
+              end: new Date(events[i]._instance.range.end)
+            }))
+          }
+          // turning formatted events into string to store them in the input, can be undo by JSON.parse()
+          document.getElementById("calEvents").value = formattedEvents;
+          document.getElementById("calForm").submit();
+
+        });
       });
+
+     
     </script>
   </head>
+
   <body>
     <nav class="navbar">
       <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
@@ -47,10 +67,19 @@
         </div>
       </div>
     </nav>
-    <div class="calMain">
-      <h2>Enter needed availability for roster</h2>
-      <div id="calendar"></div>
-      <button class="submitHrs">Submit Hours</button>
-    </div>
+    
+    <form id="calForm" action="/display_roster/<%= roster._id %>" method="POST">
+      <div class="calMain">
+        <h2>Enter needed availability for roster</h2>
+        <div id="calendar"></div>
+        <input id="calEvents" name="calEvents" type="hidden" />
+      </div>
+      <div>
+        <button class="submitHrs">Back</button>
+        <button class="submitHrs" id="rosterSubmit" >
+          Submit Roster
+        </button>
+      </div>
+    </form>
   </body>
 </html>
