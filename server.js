@@ -59,7 +59,6 @@ app.post("/bizCreateAcc", (req, res) => {
     );
 });
 
-// NEED TO TEST
 app.post("/candCreateAcc", (req, res) => {
   var newCandidate = new Candidate();
   newCandidate.CandidateName = req.body.CandidateName;
@@ -111,33 +110,8 @@ app.get("/candidateInfo/:id", (req, res) => {
   });
 });
 
-//adding job roster to db
-app.post("/submitRoster/:id", (req, res) => {
-  //var newRoster = new Roster();
-  var givenObjectId = req.params.id.toString(); // turning it from int->string
-  console.log("givenObjectId (Roster): ", givenObjectId);
 
-  /*
-    db.collections.BusinessCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
-      console.log('business result', result)
-      
-      newRoster.BusinessId = result._id;
-      newRoster.BusinessName = result.CompanyName;
-      newRoster.JobTitle = req.body.JobTitle;
-      newRoster.Hours = req.body.Hours;
-    })*/
 
-  // Save Roster object to Roster collection database
-  db.collections.RosterCollection.findOne({
-    _id: ObjectId(givenObjectId),
-  }).then((result) => {
-    console.log("Roster result plz", result);
-    result.JobSchedule = req.body.jobSchedule;
-    // Note: Didn't store info from "Fill Out Work Hours" button
-    result.DesiredStart = req.body.desiredStart;
-    res.render("./employer/displayRoster", { roster: result });
-  });
-});
 
 //given a business id, shows roster info
 app.get("/rosterInfo/:id", (req, res) => {
@@ -176,55 +150,114 @@ app.get("/hr_signup", (req, res) => {
   res.sendFile(__dirname + "/hr-index.html");
 });
 //function to send you to roster creation
-app.get("/roster_creation/:id", (req, res) => {
+app.get("/roster_creation/1/:id", (req, res) => {
   var givenObjectId = req.params.id.toString(); // turning it from int->string
-  console.log("given id: ", givenObjectId);
+  console.log("First page id: ", givenObjectId);
   db.collections.BusinessCollection.findOne({
     _id: ObjectId(givenObjectId),
   }).then((result) => {
-    console.log("roster result", result);
-    res.render("./employer/firstRosterPage", { business: result });
+    
+    console.log("1st page biz found", result);
+    var newRoster = new Roster();
+    newRoster.BusinessId = result._id;
+    newRoster.BusinessName = result.CompanyName;
+    newRoster
+      .save()
+      .then((savedRoster) => {
+        // console.log("displayRoster loaded");
+        console.log("1st page SAVEDROSTER: ", savedRoster);
+        // res.render("./employer/secondRosterPage", { roster: savedRoster });
+        res.render("./employer/firstRosterPage", { roster: savedRoster });
+      })
+      .catch((err) =>
+        console.log("something went wrong when saving new roster:", err)
+      );
+    
   });
 });
 
 app.post("/roster_creation/2/:id", (req, res) => {
   var givenObjectId = req.params.id.toString(); // turning it from int->string
   console.log("given id: ", givenObjectId);
-  var newRoster = new Roster();
-  db.collections.BusinessCollection.findOne({
-    _id: ObjectId(givenObjectId),
+  console.log('given form', req.body)
+  // var newRoster = new Roster();
+  db.collections.RosterCollection.updateOne(
+    {_id: ObjectId(givenObjectId)}, //finding the roster to modify
+    // modifying the roster
+    {
+      $set: {
+      JobTitle: req.body.JobTitle,
+      JobDesc:req.body.JobDesc,
+      Skills: req.body.Skills,
+      Location: [req.body.location, req.body.locationInfo],
+      Commitment: req.body.commitment
+    }
   }).then((result) => {
-    console.log("business result", result);
-    newRoster.BusinessId = result._id;
-    newRoster.BusinessName = result.CompanyName;
-    newRoster.JobTitle = req.body.JobTitle;
-    newRoster.JobDesc = req.body.Desc;
-    newRoster.Skills = req.body.Skills;
-    newRoster.Location = [req.body.location, req.body.locationInfo];
-    newRoster.Commitment = req.body.commitment;
-    //res.render('./employer/secondRosterPage', {roster: newRoster})
-    // Save Roster object to database
-    newRoster
-      .save()
-      .then((savedRoster) => {
-        console.log("displayRoster loaded");
-        console.log("SAVEDROSTER: ", savedRoster);
-        res.render("./employer/secondRosterPage", { roster: savedRoster });
+    console.log('updating done', result)
+    db.collections.RosterCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
+        console.log('is roster updated', result)
+        res.render('./employer/secondRosterPage', {roster: result})
       })
-      .catch((err) =>
-        console.log("something went wrong when saving new roster:", err)
-      );
-  });
+  })
 });
-// Don't need bc business id saved in roster
-// db.collections.BusinessCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
-//   console.log('business result', result)
-//   res.render('./employer/secondRosterPage', {business: result})
-// })
+//adding job roster to db
+app.post("/roster_creation/3/:id", (req, res) => {
+  //var newRoster = new Roster();
+  var givenObjectId = req.params.id.toString(); // turning it from int->string
+  console.log("submit: ", givenObjectId);
+  console.log("info to add", req.body)
+  db.collections.RosterCollection.updateOne(
+    {_id: ObjectId(givenObjectId)}, //finding the roster to modify
+    // modifying the roster
+    {
+      $set: {
+      JobSchedule: req.body.jobSchedule,
+      DesiredStart:req.body.desiredStart,
+      Composation: req.body.Compensation,
+      CovidPrecautions: req.body.CovidPrecautions
+      // do we need to add length of role?
+
+    }
+  }).then((result) => {
+    console.log('updating done 2', result)
+    db.collections.RosterCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
+        console.log('is roster updated', result)
+        res.render("./employer/rosterCalander", { roster: result });
+      })
+  })
+});
+
+app.post("/display_roster/:id", (req, res) => {
+  //var newRoster = new Roster();
+  var givenObjectId = req.params.id.toString(); // turning it from int->string
+  console.log("submit final: ", givenObjectId);
+  console.log("events to add", req.body)
+  // console.log("events to add 2", req.params)
+  // console.log("events whole", req)
+  db.collections.RosterCollection.updateOne(
+    {_id: ObjectId(givenObjectId)}, //finding the roster to modify
+    // modifying the roster
+    {
+      $set: {
+      Availability: req.body.calEvents
+      // do we need to add length of role?
+
+    }
+  }).then((result) => {
+    console.log('final updating done!', result)
+    db.collections.RosterCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
+        console.log('is roster updated', result)
+        console.log('hours',result.Availability)
+        console.log('hours 2',result.Availability[0], ' hi')
+        res.render("./employer/displayRoster", { roster: result });
+      })
+  })
+});
 
 app.get("/display_roster/:id", (req, res) => {
   var givenObjectId = req.params.id.toString(); // turning it from int->string
   console.log("given id: ", givenObjectId);
+  res.render("./employer/displayRoster");
 
   db.collections.RosterCollection.findOne({
     _id: ObjectId(givenObjectId),

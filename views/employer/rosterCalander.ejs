@@ -10,6 +10,7 @@
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         console.log("function is running");
+
         var calendarEl = document.getElementById("calendar");
         var calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: "timeGridWeek",
@@ -26,12 +27,35 @@
           },
           events: [],
           allDaySlot: false,
-          height: 480
+          height: 480,
         });
         calendar.render();
+        console.log("events", calendar.events);
+        const button = document.getElementById("rosterSubmit");
+        console.log("btn", button);
+        button.addEventListener("click", () => {
+          var events = calendar.getEvents();
+          console.log(events);
+          var fortmattedEvents = []
+          for (let i = 0; i < events.length; i++) {
+            
+            fortmattedEvents.push({
+              start: Date(events[i]._instance.range.start),
+              end:Date(events[i]._instance.range.end)
+            })
+          }
+          console.log(fortmattedEvents)
+          document.getElementById("calEvents").value = fortmattedEvents;
+          console.log(document.getElementById("calEvents").value);
+          // document.getElementById("calForm").submit();
+          // console.log("done submitting");
+        });
       });
+
+     
     </script>
   </head>
+
   <body>
     <nav class="navbar">
       <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
@@ -47,10 +71,18 @@
         </div>
       </div>
     </nav>
-    <div class="calMain">
-      <h2>Enter needed availability for roster</h2>
-      <div id="calendar"></div>
-      <button class="submitHrs">Submit Hours</button>
-    </div>
+    <form id="calForm" action="/display_roster/<%= roster._id %>" method="POST">
+      <div class="calMain">
+        <h2>Enter needed availability for roster</h2>
+        <div id="calendar"></div>
+        <input id="calEvents" name="calEvents" type="hidden" />
+      </div>
+      <div>
+        <button class="submitHrs">Back</button>
+        <button class="submitHrs" id="rosterSubmit" >
+          Submit Roster
+        </button>
+      </div>
+    </form>
   </body>
 </html>
