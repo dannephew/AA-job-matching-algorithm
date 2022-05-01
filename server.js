@@ -115,7 +115,7 @@ app.get("/candidateInfo/:id", (req, res) => {
 
 //given a business id, shows roster info
 app.get("/rosterInfo/:id", (req, res) => {
-  //we can acesses the id passed to /businessInfo through req.params.id
+  //we can access the id passed to /businessInfo through req.params.id
   var givenObjectId = req.params.id.toString(); // turning it from int->string
 
   console.log("given id: ", givenObjectId);
@@ -134,8 +134,8 @@ app.get("/rosterInfo/:id", (req, res) => {
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/master-index.html");
 });
-app.get("/roster_calander", (req, res) => {
-  res.render("./employer/rosterCalander.ejs");
+app.get("roster_calender", (req, res) => {
+  res.render("./employer/rosterCalender.ejs");
 });
 //function to send you to candidate signup
 app.get("/candidate_signup", (req, res) => {
@@ -149,24 +149,23 @@ app.get("/business_signup", (req, res) => {
 app.get("/hr_signup", (req, res) => {
   res.sendFile(__dirname + "/hr-index.html");
 });
-//function to send you to roster creation
+//triggered when add roster is clicked on homepage
 app.get("/roster_creation/1/:id", (req, res) => {
   var givenObjectId = req.params.id.toString(); // turning it from int->string
-  console.log("First page id: ", givenObjectId);
+  
   db.collections.BusinessCollection.findOne({
     _id: ObjectId(givenObjectId),
   }).then((result) => {
     
-    console.log("1st page biz found", result);
+    console.log("biz found", result);
+    // creates a new roster and stores the business id in the roster
     var newRoster = new Roster();
     newRoster.BusinessId = result._id;
     newRoster.BusinessName = result.CompanyName;
     newRoster
       .save()
       .then((savedRoster) => {
-        // console.log("displayRoster loaded");
         console.log("1st page SAVEDROSTER: ", savedRoster);
-        // res.render("./employer/secondRosterPage", { roster: savedRoster });
         res.render("./employer/firstRosterPage", { roster: savedRoster });
       })
       .catch((err) =>
@@ -175,12 +174,12 @@ app.get("/roster_creation/1/:id", (req, res) => {
     
   });
 });
-
+// triggered when clicking "next" on first roster page
 app.post("/roster_creation/2/:id", (req, res) => {
   var givenObjectId = req.params.id.toString(); // turning it from int->string
   console.log("given id: ", givenObjectId);
   console.log('given form', req.body)
-  // var newRoster = new Roster();
+  // find the current roster through the id passed in the url and update it 
   db.collections.RosterCollection.updateOne(
     {_id: ObjectId(givenObjectId)}, //finding the roster to modify
     // modifying the roster
@@ -193,19 +192,18 @@ app.post("/roster_creation/2/:id", (req, res) => {
       Commitment: req.body.commitment
     }
   }).then((result) => {
-    console.log('updating done', result)
+    // finding the roster in db to pass to second page
     db.collections.RosterCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
         console.log('is roster updated', result)
         res.render('./employer/secondRosterPage', {roster: result})
       })
   })
 });
-//adding job roster to db
+// triggered when "next" is pressed on the second roster_creation page
 app.post("/roster_creation/3/:id", (req, res) => {
-  //var newRoster = new Roster();
+  
   var givenObjectId = req.params.id.toString(); // turning it from int->string
-  console.log("submit: ", givenObjectId);
-  console.log("info to add", req.body)
+  // finds and updates roster
   db.collections.RosterCollection.updateOne(
     {_id: ObjectId(givenObjectId)}, //finding the roster to modify
     // modifying the roster
@@ -219,36 +217,30 @@ app.post("/roster_creation/3/:id", (req, res) => {
 
     }
   }).then((result) => {
-    console.log('updating done 2', result)
     db.collections.RosterCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
         console.log('is roster updated', result)
-        res.render("./employer/rosterCalander", { roster: result });
+        res.render("./employer/rosterCalender", { roster: result });
       })
   })
 });
-
+// triggered after filling out hours on calender
 app.post("/display_roster/:id", (req, res) => {
   //var newRoster = new Roster();
   var givenObjectId = req.params.id.toString(); // turning it from int->string
   console.log("submit final: ", givenObjectId);
   console.log("events to add", req.body)
-  // console.log("events to add 2", req.params)
-  // console.log("events whole", req)
+  
   db.collections.RosterCollection.updateOne(
     {_id: ObjectId(givenObjectId)}, //finding the roster to modify
     // modifying the roster
     {
       $set: {
       Availability: req.body.calEvents
-      // do we need to add length of role?
-
     }
   }).then((result) => {
-    console.log('final updating done!', result)
+    // for now just displaying info of roster on roster page
     db.collections.RosterCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
-        console.log('is roster updated', result)
-        console.log('hours',result.Availability)
-        console.log('hours 2',result.Availability[0], ' hi')
+        console.log('roster is submitted', result)
         res.render("./employer/displayRoster", { roster: result });
       })
   })
@@ -263,9 +255,6 @@ app.get("/display_roster/:id", (req, res) => {
     _id: ObjectId(givenObjectId),
   }).then((result) => {
     console.log("roster result", result);
-    // result.BusinessId = businessId
-    // result.BusinessName = businessResult.CompanyName
     res.render("./employer/displayRoster", { roster: result });
-    // , business: businessResult
   });
 });

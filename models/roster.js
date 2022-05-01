@@ -39,7 +39,8 @@ var RosterSchema = new mongoose.Schema({
         type: String
     },
     Availability:{
-        type:Array
+        type:Array,
+        default: Date
     }
 
 })
