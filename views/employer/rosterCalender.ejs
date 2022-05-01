@@ -1,0 +1,85 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.3.0/main.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.css"
+    />
+    <link type="text/css" rel="stylesheet" href="/css/roster.css" />
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var calendarEl = document.getElementById("calendar");
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: "timeGridWeek",
+          headerToolbar: false,
+          selectable: true,
+          editable: true,
+          select: function (info) {
+            alert("selected " + info.startStr + " to " + info.endStr);
+            calendar.addEvent({
+              title: "availability",
+              start: info.startStr,
+              end: info.endStr,
+            });
+          },
+          events: [],
+          allDaySlot: false,
+          height: 480,
+        });
+        calendar.render();
+        const button = document.getElementById("rosterSubmit");
+        button.addEventListener("click", () => {
+          var events = calendar.getEvents();
+          var formattedEvents = []
+          for (let i = 0; i < events.length; i++) {
+            var start = new Date(events[i]._instance.range.start)
+            console.log( "string" , JSON.stringify( new Date(events[i]._instance.range.start)))
+            formattedEvents.push(
+              JSON.stringify({
+              start: new Date(events[i]._instance.range.start),
+              end: new Date(events[i]._instance.range.end)
+            }))
+          }
+          // turning formatted events into string to store them in the input, can be undo by JSON.parse()
+          document.getElementById("calEvents").value = formattedEvents;
+          document.getElementById("calForm").submit();
+
+        });
+      });
+
+     
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar">
+      <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
+      <div class="dropdown">
+        <button class="dropbtn">
+          Profile
+          <i class="fa fa-caret-down"> </i><i class="fa fa-fw fa-user"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
+        </div>
+      </div>
+    </nav>
+    
+    <form id="calForm" action="/display_roster/<%= roster._id %>" method="POST">
+      <div class="calMain">
+        <h2>Enter needed availability for roster</h2>
+        <div id="calendar"></div>
+        <input id="calEvents" name="calEvents" type="hidden" />
+      </div>
+      <div>
+        <button class="submitHrs">Back</button>
+        <button class="submitHrs" id="rosterSubmit" >
+          Submit Roster
+        </button>
+      </div>
+    </form>
+  </body>
+</html>
