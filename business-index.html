@@ -6,6 +6,7 @@
             Business Create Account
         </title>
         <!-- <link rel="stylesheet" href="/style.css"> -->
+        
     </head>
     <body>
         <h1 class="signupHeader">Create a new Account</h1>
@@ -42,10 +43,20 @@
 
             <div class="formInputGroup">
                 <label for="phoneNum">Business Phone Number:</label>
-                <input class="formInput" type="text" placeholder="###-###-####" name="phoneNum" >
+                <input class="formInput" type="text" placeholder="###-###-####" name="phoneNum" id="phoneNum">
             </div>            
             <button class="submitBtn" type="submit">Create Account</button>
         </form>
-
+        <script>
+            
+            var phone = document.getElementById('phoneNum');
+            console.log('phone: ', phone)
+            phone.addEventListener('keydown', function(e){
+                key = e.key;
+                return isFinite(key) || key == '-' || key == 'Backspace'
+                console.log('RUNNING')
+            })
+            
+        </script>
     </body>
 </html>
