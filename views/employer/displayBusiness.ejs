@@ -19,23 +19,9 @@
     <!-- <link rel="stylesheet" href="/style.css"> -->
   </head>
   <body>
-    <nav class="navbar">
-      <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
-      <div class="dropdown">
-        <button class="dropbtn">
-          Profile
-          <i class="fa fa-caret-down"> </i><i class="fa fa-fw fa-user"></i>
-        </button>
-        <div class="dropdown-content">
-          <a href="#">Link 1</a>
-          <a href="#">Link 2</a>
-          <a href="#">Link 3</a>
-        </div>
-      </div>
-    </nav>
+    <%- include("../components/header", {businessId: business._id}); -%>
     <section class="top">
       <h2>Welcome, <%= business.CompanyName %>!</h2>
-
       <h2>Your Job Postings</h2>
       <form>
         <input class="postings" type="submit" value="Cashier 1" />
