@@ -48,13 +48,27 @@
             <button class="submitBtn" type="submit">Create Account</button>
         </form>
         <script>
-            
             var phone = document.getElementById('phoneNum');
-            console.log('phone: ', phone)
+            var phoneArray = [] // Track previously entered keys
+            var numCount = 0;
             phone.addEventListener('keydown', function(e){
                 key = e.key;
-                return isFinite(key) || key == '-' || key == 'Backspace'
-                console.log('RUNNING')
+                if (key == 'Backspace'){
+                    popKey = phoneArray.pop()
+                    if(isFinite(popKey)) numCount--; // Reduce number count if press 'Backspace'
+                }
+                // Don't type more than 10 numbers
+                if(numCount >= 10) { // Or 11 if #-###-###-####
+                    e.preventDefault();
+                } else {
+                    if(isFinite(key)) numCount++; // if key is a num
+                    // Allow numbers, dashes, and backspace input
+                    if (!(isFinite(key) || key == '-' || key == 'Backspace')){
+                        e.preventDefault();
+                    } else { // Valid input
+                        if(key != 'Backspace') phoneArray.push(key);
+                    }
+                }
             })
             
         </script>
