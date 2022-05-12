@@ -35,12 +35,22 @@
 
             <div class="formInputGroup">
                 <label for="NumberOfEmp">Number of Employees:</label>
-                <input class="formInput" type="number" placeholder="Ex: 100" name="NumberOfEmp"
-                            oninvalid="numError=document.getElementById('numError'); 
-                                            numError.textContent = 'Please enter a valid number.';
-                                            numError.style.color = 'red'">
+                <input class="formInput" type="number" placeholder="Ex: 100" name="NumberOfEmp" id="NumberOfEmp">
             </div>
             <span id="numError"></span>
+            <script>
+                input = document.getElementById("NumberOfEmp");
+                numError = document.getElementById('numError'); 
+                input.addEventListener('keydown', function(e){
+                    key = e.key;
+                    if (!(isFinite(key) || key == 'Backspace')){ // If try to type invalid input
+                        numError.textContent = "Only enter numbers."
+                        numError.style.color = "red"
+                    } else { // Valid input
+                        numError.textContent = ""
+                    }
+                })
+            </script>
 
             <div class="formInputGroup">
                 <label for="managerName">Manager First & Last Name:</label>
@@ -60,7 +70,7 @@
             <button class="submitBtn" type="submit">Create Account</button>
         </form>
         <script>
-            var error = document.getElementById("error");
+            error = document.getElementById("error");
             var phone = document.getElementById('phoneNum');
             var phoneArray = [] // Track previously entered keys
             var numCount = 0;
