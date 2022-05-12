@@ -19,20 +19,7 @@
   </head>
 
   <body>
-    <nav class="navbar">
-      <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
-      <div class="dropdown">
-        <button class="dropbtn">
-          Profile
-          <i class="fa fa-caret-down"> </i><i class="fa fa-fw fa-user"></i>
-        </button>
-        <div class="dropdown-content">
-          <a href="#">Link 1</a>
-          <a href="#">Link 2</a>
-          <a href="#">Link 3</a>
-        </div>
-      </div>
-    </nav>
+    <%- include("../components/header", {businessId: roster.BusinessId}); -%>
     <!-- ADD MARGIN -->
     <section class="top" >
       <h2>Create A New Roster</h2>

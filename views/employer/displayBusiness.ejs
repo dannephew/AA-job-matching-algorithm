@@ -19,18 +19,9 @@
     <!-- <link rel="stylesheet" href="/style.css"> -->
   </head>
   <body>
-    <nav class="navbar">
-      <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
-      <div class="dropdown">
-        <button class="dropbtn">
-          Profile
-          <i class="fa fa-caret-down"> </i><i class="fa fa-fw fa-user"></i>
-        </button>
-      </div>
-    </nav>
+    <%- include("../components/header", {businessId: business._id}); -%>
     <section class="top">
       <h2>Welcome, <%= business.CompanyName %>!</h2>
-
       <h2>Your Job Postings</h2>
       <form>
         <input class="postings" type="submit" value="Cashier 1" />
@@ -48,22 +39,9 @@
     </section>
     <section class="matchSection">
       <h3>Your matches</h3>
-      <section class="matches">
-        <section class="match">
-          <i class="fa-solid fa-user"></i>
-          <section class="matchText">
-            <h4>John Doe</h4>
-            <span>Phone: ###-###-####</span>
-            <span>Email: email@gmail.com</span>
-            <span>Location: 2 Miles</span>
-            <span>Available to start working: 4/7/22</span>
-          </section>
-          <section class="matchCalendar">
-            <span>see availability</span>
-            <i class="fa-solid fa-calendar"></i>
-          </section>
-        </section>
-      </section>
+      <%- include("../components/matchCard"); -%>
+      
     </section>
+   
   </body>
 </html>
