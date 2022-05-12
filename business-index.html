@@ -8,6 +8,9 @@
         <!-- <link rel="stylesheet" href="/style.css"> -->
         
     </head>
+    <script>
+
+    </script>
     <body>
         <h1 class="signupHeader">Create a new Account</h1>
         <form class="signupForm" action="/bizCreateAcc" method="POST">
@@ -18,8 +21,12 @@
 
             <div class="formInputGroup">
                 <label for="BusinessEmail">Enter Company Email:</label>
-                <input class="formInput" type="text" placeholder="Ex: example@email.com" name="BusinessEmail">
+                <input class="formInput" type="email" placeholder="Ex: example@email.com" name="BusinessEmail" 
+                       oninvalid="emailError=document.getElementById('emailError'); 
+                                  emailError.textContent = 'Please enter a valid email.';
+                                  emailError.style.color = 'red'">
             </div>
+            <span id="emailError"></span> 
 
             <div class="formInputGroup">
                 <label for="Password">Enter password:</label>
@@ -28,8 +35,12 @@
 
             <div class="formInputGroup">
                 <label for="NumberOfEmp">Number of Employees:</label>
-                <input class="formInput" type="text" placeholder="Ex: 100" name="NumberOfEmp">
+                <input class="formInput" type="number" placeholder="Ex: 100" name="NumberOfEmp"
+                            oninvalid="numError=document.getElementById('numError'); 
+                                            numError.textContent = 'Please enter a valid number.';
+                                            numError.style.color = 'red'">
             </div>
+            <span id="numError"></span>
 
             <div class="formInputGroup">
                 <label for="managerName">Manager First & Last Name:</label>
@@ -44,10 +55,12 @@
             <div class="formInputGroup">
                 <label for="phoneNum">Business Phone Number:</label>
                 <input class="formInput" type="text" placeholder="###-###-####" name="phoneNum" id="phoneNum">
-            </div>            
+            </div>
+            <span id="error"></span>            
             <button class="submitBtn" type="submit">Create Account</button>
         </form>
         <script>
+            var error = document.getElementById("error");
             var phone = document.getElementById('phoneNum');
             var phoneArray = [] // Track previously entered keys
             var numCount = 0;
@@ -60,17 +73,21 @@
                 // Don't type more than 10 numbers
                 if(numCount >= 10) { // Or 11 if #-###-###-####
                     e.preventDefault();
+                    error.textContent = "You may only enter 10 numbers."
+                    error.style.color = "red"
                 } else {
                     if(isFinite(key)) numCount++; // if key is a num
                     // Allow numbers, dashes, and backspace input
-                    if (!(isFinite(key) || key == '-' || key == 'Backspace')){
-                        e.preventDefault();
+                    if (!(isFinite(key) || key == '-' || key == 'Backspace')){ // If try to type invalid input
+                        e.preventDefault(); // Key won't show up
+                        error.textContent = "Please only enter numbers or dashes."
+                        error.style.color = "red"
                     } else { // Valid input
                         if(key != 'Backspace') phoneArray.push(key);
+                        error.textContent = ""
                     }
                 }
             })
-            
         </script>
     </body>
 </html>
