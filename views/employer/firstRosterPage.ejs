@@ -44,6 +44,7 @@
           type="text"
           placeholder="Ex: Cashier"
           name="JobTitle"
+          required
         />
       </div>
       <div class="formInputGroup">
@@ -53,6 +54,7 @@
           type="text"
           placeholder="Ex: "
           name="JobDesc"
+          required
         />
       </div>
 
@@ -61,7 +63,7 @@
         <input 
           class="formInput" 
           type="text" 
-          placeholder="Ex: Bartending"
+          placeholder="Ex: Bartending, Customer Service, ..."
           name="Skills" 
         />
       </div>
@@ -109,11 +111,13 @@
       </div>
 
       <div class="formInputGroup additionalInfo">
+        <label for="locationInfo">More info/Address: </label>
         <input
           class="formInput"
           type="text"
-          placeholder="Additional Info"
+          placeholder="123 Main St, City 12345"
           name="locationInfo"
+          required
         />
       </div>
 
