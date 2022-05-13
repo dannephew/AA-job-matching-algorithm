@@ -147,3 +147,7 @@ body {
   align-items: center;
   margin-top: 5vh;
 }
+.required:after {
+  content:" *";
+  color: red;
+}

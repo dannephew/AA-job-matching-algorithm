@@ -38,7 +38,7 @@
 
     <form class="signupForm" action="/roster_creation/2/<%= roster._id %>", method="POST">
       <div class="formInputGroup">
-        <label for="JobTitle">Job Title: </label>
+        <label for="JobTitle" class="required">Job Title: </label>
         <input
           class="formInput"
           type="text"
@@ -48,7 +48,7 @@
         />
       </div>
       <div class="formInputGroup">
-        <label for="JobDesc">Job Description: </label>
+        <label for="JobDesc" class="required">Job Description: </label>
         <input
           class="formInput"
           type="text"
@@ -69,7 +69,7 @@
       </div>
 
       <div class="formInputGroup">
-        <label for="Location">Location: </label>
+        <label for="Location"class="required" >Location: </label>
 
         <div class="radioForm">
           <label class="locationRadio">
@@ -78,6 +78,7 @@
             type="radio" 
             value="One Location" 
             name = "location"
+            required
             /> One Location
           </label>
 
@@ -111,7 +112,7 @@
       </div>
 
       <div class="formInputGroup additionalInfo">
-        <label for="locationInfo">More info/Address: </label>
+        <label for="locationInfo" class="required">More info/Address: </label>
         <input
           class="formInput"
           type="text"
