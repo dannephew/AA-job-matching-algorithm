@@ -151,3 +151,8 @@ body {
   content:" *";
   color: red;
 }
+.btnGroup{
+  display: flex;
+  margin: auto;
+  width: 50%;
+}
