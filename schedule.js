@@ -139,7 +139,14 @@ function listCandidates() {
   });
 }
 
-listCandidates().then((allCandidates) => {
+/*listCandidates().then((allCandidates) => {
   let matchCandidates = getCandidates(exampleEmployer, allCandidates);
   console.log(matchCandidates);
-});
+});*/
+
+//exports.listCandidates = listCandidates();
+//exports.getCandidates = getCandidates();
+
+module.exports = {
+  listCandidates, getCandidates, compareHours, readTimeData, clean_time
+};

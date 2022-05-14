@@ -3,6 +3,10 @@ var Business = require("./models/business");
 var Candidate = require("./models/candidate");
 var Roster = require("./models/roster");
 
+// job matches
+var matchHelp = require("./schedule");
+//console.log(matches);
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
@@ -87,14 +91,39 @@ app.get("/businessInfo/:id", (req, res) => {
   var givenObjectId = req.params.id.toString(); // turning it from int->string
 
   console.log("given id: ", givenObjectId);
-
+  var matchCandidates = null;
   //once we got the id passed to this function, search the database for that id
   db.collections.BusinessCollection.findOne({
     _id: ObjectId(givenObjectId),
   }).then((result) => {
     console.log("result", result);
+
+    // check if the business has a roster
+    db.collections.RosterCollection.findOne({
+      BusinessId: ObjectId(givenObjectId),
+    }).then((result) => {
+      console.log("roster result", result);
+      
+      if (result === null) {
+        console.log("no current roster");
+      }
+      else {
+        // getting candidates with matching availabilities
+        matchCandidates = matchHelp.listCandidates().then((allCandidates) => {
+          //console.log(allCandidates);
+          let matchCandidates = matchHelp.getCandidates(result, allCandidates);
+          console.log(matchCandidates);
+          return matchCandidates;
+        });
+        console.log("Match candidates promise: ", matchCandidates);
+        matchCandidates.then(function(result) {
+          console.log("Match candidates: ", result);
+        });
+      }
+    });
+
     // when id is found in database, send the business account we found to displayBusiness so it can display the business information
-    res.render("./employer/displayBusiness.ejs", { business: result });
+    res.render("./employer/displayBusiness.ejs", { business: result, matches: matchCandidates });
   });
 });
 
