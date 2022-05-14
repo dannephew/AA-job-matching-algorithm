@@ -2,6 +2,8 @@
 <section class="matches">
     <% if (matches === null) { %>
         <p>No available candidates</p>
+    <%} else if (matches.length == 0) { %>
+        <p>No available candidates</p>
     <%} else { %>
         <% for(let i=0; i<matches.length; i++) { %>
             <section class="match">
