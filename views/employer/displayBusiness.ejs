@@ -19,7 +19,7 @@
     <!-- <link rel="stylesheet" href="/style.css"> -->
   </head>
   <body>
-    <%- include("../components/header", {businessId: business._id}); -%>
+    <%- include("../Components/header", {businessId: business._id}); -%>
     <section class="top">
       <h2>Welcome, <%= business.CompanyName %>!</h2>
       <h2>Your Job Postings</h2>
@@ -39,7 +39,7 @@
     </section>
     <section class="matchSection">
       <h3>Your matches</h3>
-      <%- include("../components/matchCard", {business: business, matches: matches});-%>
+      <%- include("../Components/matchCard", {business: business, matches: matches});-%>
       
     </section>
    
