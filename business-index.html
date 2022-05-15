@@ -2,6 +2,7 @@
 <html>
     <head>
         <link type="text/css" rel="stylesheet"  href="/css/signupStyle.css">
+        <script src="controllers/formControl.js"></script>
         <title>
             Business Create Account
         </title>
@@ -14,17 +15,22 @@
                 <label  for="CompanyName">Enter Company Name:</label>
                 <input class="formInput" type="text" placeholder="Ex: Company Name" name="CompanyName">
             </div>
-
             <div class="formInputGroup">
                 <label for="BusinessEmail">Enter Company Email:</label>
                 <input class="formInput" type="text" placeholder="Ex: example@email.com" name="BusinessEmail">
             </div>
 
+
             <div class="formInputGroup">
                 <label for="Password">Enter password:</label>
-                <input class="formInput" type="text" placeholder="Ex: password" name="Password">   
+                <input class="formInput" type="password" placeholder="Ex: password" name="Password" id="passwordVal"> 
+                <div id="check">
+                    <input type="checkbox" onclick="togglePasswordVisibility()">Show Password
+                </div>  
             </div>
-
+            
+            
+            
             <div class="formInputGroup">
                 <label for="NumberOfEmp">Number of Employees:</label>
                 <input class="formInput" type="text" placeholder="Ex: 100" name="NumberOfEmp">
