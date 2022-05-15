@@ -1,0 +1,26 @@
+
+<section class="matches">
+    <% if (matches === null) { %>
+        <p>No available candidates</p>
+    <%} else if (matches.length == 0) { %>
+        <p>No available candidates</p>
+    <%} else { %>
+        <% for(let i=0; i<matches.length; i++) { %>
+            <section class="match">
+            <i class="fa-solid fa-user"></i>
+            <section class="matchText">
+                <!-- eventually feed in candidate info below -->
+                <h4>Name: <%= matches[i].CandidateName %></h4>  
+                <!--<span>Phone: ###-###-####</span>-->
+                <!--<span>Email: email@gmail.com</span>-->
+                <span>Location: <%= matches[i].Location %></span>
+                <!--<span>Available to start working: <%= matches[i].Availability %></span>-->
+            </section>
+            <section class="matchCalendar">
+                <span>see availability</span>
+                <i class="fa-solid fa-calendar"></i>
+            </section>
+            </section>
+        <% } %>
+    <%} %>
+</section>

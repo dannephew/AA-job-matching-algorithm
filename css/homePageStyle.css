@@ -83,6 +83,10 @@ body {
     text-decoration: none;
 }
 
+img {
+    height: 50px;
+}
+
 /* The dropdown container */
 .dropdown {
     float: left;

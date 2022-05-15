@@ -10,11 +10,14 @@
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         var calendarEl = document.getElementById("calendar");
+        const currentDate = new Date();
+        let currentDay = currentDate.getDay()
         var calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: "timeGridWeek",
           headerToolbar: false,
           selectable: true,
           editable: true,
+          firstDay: currentDay,
           select: function (info) {
             alert("selected " + info.startStr + " to " + info.endStr);
             calendar.addEvent({
@@ -62,31 +65,19 @@
   </head>
 
   <body>
-    <nav class="navbar">
-      <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
-      <div class="dropdown">
-        <button class="dropbtn">
-          Profile
-          <i class="fa fa-caret-down"> </i><i class="fa fa-fw fa-user"></i>
-        </button>
-        <div class="dropdown-content">
-          <a href="#">Link 1</a>
-          <a href="#">Link 2</a>
-          <a href="#">Link 3</a>
-        </div>
-      </div>
-    </nav>
+    <%- include("../components/header", {businessId: roster.BusinessId}); -%>
     
     <form id="calForm" action="/display_roster/<%= roster._id %>" method="POST">
+    <!-- <form id="calForm" action="/di%>"> -->
       <div class="calMain">
         <h2>Enter needed availability for roster</h2>
         <span id="calError"></span>
         <div id="calendar"></div>
         <input id="calEvents" name="calEvents" type="hidden" />
       </div>
-      <div class="btnGroup">
-        <button type='button' class="submitHrs">Back</button>
-        <button type='button' class="submitHrs" id="rosterSubmit" >
+      <div>
+        <button class="submitHrs" onclick="history.back()" type="button">Back</button>
+        <button class="submitHrs" id="rosterSubmit" >
           Submit Roster
         </button>
       </div>

@@ -3,6 +3,10 @@ var Business = require("./models/business");
 var Candidate = require("./models/candidate");
 var Roster = require("./models/roster");
 
+// job matches
+var matchHelp = require("./schedule");
+//console.log(matches);
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
@@ -81,7 +85,7 @@ app.post("/candCreateAcc", (req, res) => {
     );
 });
 
-//given a business id, shows account info
+// given a business id, shows account info
 app.get("/businessInfo/:id", (req, res) => {
   //we can acesses the id passed to /businessInfo through req.params.id
   var givenObjectId = req.params.id.toString(); // turning it from int->string
@@ -94,7 +98,38 @@ app.get("/businessInfo/:id", (req, res) => {
   }).then((result) => {
     console.log("result", result);
     // when id is found in database, send the business account we found to displayBusiness so it can display the business information
-    res.render("./employer/displayBusiness.ejs", { business: result });
+    res.render("./employer/displayBusiness.ejs", { business: result, matches: null });
+  });
+});
+
+//given a business id and roster id, shows account info and matching candidates
+app.get("/businessInfo/:bus_id/:ros_id", (req, res) => {
+  //we can acesses the id passed to /businessInfo through req.params.id
+  var business_id = req.params.bus_id.toString(); // turning it from int->string
+  console.log("given id: ", business_id);
+
+  //once we got the id passed to this function, search the database for that id
+  db.collections.BusinessCollection.findOne({
+    _id: ObjectId(business_id),
+  }).then((result) => {
+    console.log("result", result);
+
+    // getting candidates with matching availabilities
+    matchCandidates = matchHelp.listCandidates().then((allCandidates) => {
+      //console.log(allCandidates);
+      let matchCandidates = matchHelp.getCandidates(result, allCandidates);
+      //console.log("Matched candid", matchCandidates);
+      return matchCandidates;
+    });
+
+    //console.log("Match candidates promise: ", matchCandidates);
+    matchCandidates.then(function(matches) {
+      console.log("Match candidates result", result);
+      res.render("./employer/displayBusiness.ejs", { business: result, matches: matches });
+    }).catch(function() {
+      console.log("Match candidates promise rejected");
+      res.render("./employer/displayBusiness.ejs", { business: result, matches: matches });
+    });
   });
 });
 
@@ -228,7 +263,7 @@ app.post("/display_roster/:id", (req, res) => {
   //var newRoster = new Roster();
   var givenObjectId = req.params.id.toString(); // turning it from int->string
   console.log("submit final: ", givenObjectId);
-  console.log("events to add", req.body)
+  console.log("events to add", req.body);
   
   db.collections.RosterCollection.updateOne(
     {_id: ObjectId(givenObjectId)}, //finding the roster to modify
@@ -240,7 +275,20 @@ app.post("/display_roster/:id", (req, res) => {
   }).then((result) => {
     // for now just displaying info of roster on roster page
     db.collections.RosterCollection.findOne({_id: ObjectId(givenObjectId)}).then(result =>{
-        console.log('roster is submitted', result)
+
+      // updates the business with a available times
+        db.collections.BusinessCollection.updateOne(
+          {_id: ObjectId(result.BusinessId)},
+          {
+            $set: {
+              Availability: req.body.calEvents
+            }
+          }).then((result) => {
+            console.log('updated business', result);
+          });
+
+        console.log('roster is submitted', result);
+
         res.render("./employer/displayRoster", { roster: result });
       })
   })

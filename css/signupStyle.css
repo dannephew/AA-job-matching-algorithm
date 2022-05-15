@@ -16,7 +16,14 @@ body{
     justify-content: space-between;
     margin: 2vh 2vw;
     width: 40%;
+    flex-direction: column;
+    
 }
+
+#check {
+    float: left;
+  }
+
 .formInput{
     border: 1px solid black;
     padding: 2vh 1vw;
