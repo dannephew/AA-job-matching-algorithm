@@ -137,12 +137,13 @@ function listCandidates() {
         });
     });
   });
-}
+};
 
-/*listCandidates().then((allCandidates) => {
-  let matchCandidates = getCandidates(exampleEmployer, allCandidates);
-  console.log(matchCandidates);
-});*/
+
+// listCandidates().then((allCandidates) => {
+//   let matchCandidates = getCandidates(exampleEmployer, allCandidates);
+//   console.log(matchCandidates);
+// });
 
 //exports.listCandidates = listCandidates();
 //exports.getCandidates = getCandidates();
