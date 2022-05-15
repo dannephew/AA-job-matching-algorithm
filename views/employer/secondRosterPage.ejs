@@ -131,10 +131,15 @@
           type="number"
           placeholder="Ex. $15/hr"
           name="Compensation"
+          oninvalid="payError=document.getElementById('payError'); 
+          payError.textContent = 'Please enter a numerical value';
+          payError.style.color = 'red'"
+          required
         />
+        <span id="payError"></span>
       </div>
       <div class="formInputGroup">
-        <label for="SupplementalPay">Suplemental Pay and Benefits: </label>
+        <label for="SupplementalPay">Supplemental Pay and Benefits: </label>
         <input
           class="formInput"
           type="text"
@@ -143,7 +148,7 @@
         />
       </div>
       <div class="formInputGroup">
-        <label for="CovidPrecautions">Suplemental COVID-19 Precautions: </label>
+        <label for="CovidPrecautions">Supplemental COVID-19 Precautions: </label>
         <input
           class="formInput"
           type="text"
