@@ -21,18 +21,17 @@
   <body>
     <%- include("../components/header", {businessId: roster.BusinessId}); -%>
     <!-- ADD MARGIN -->
-    <section class="top" >
+    <section class="top">
       <h2>Create A New Roster</h2>
     </section>
-<!--  action="/submitRoster/<%= roster._id %>" --> 
+    <!--  action="/submitRoster/<%= roster._id %>" -->
     <form
       class="signupForm"
-      
       action="/roster_creation/3/<%= roster._id %>"
       method="POST"
     >
       <div class="formInputGroup">
-        <label for="JobTitle">Job Schedule: </label>
+        <label for="JobTitle" class="required">Job Schedule: </label>
         <div class="radioForm">
           <span class="locationRadio">
             <input
@@ -40,6 +39,7 @@
               type="radio"
               value="Weekend"
               name="jobSchedule"
+              required
             />Weekend
           </span>
 
@@ -60,64 +60,82 @@
               name="jobSchedule"
             />Flexible
           </span>
-        
         </div>
       </div>
-      <!-- Required -->
       <div class="formInputGroup">
-        <label for="desiredstartdate">Desired Start Date: </label>
+        <label for="desiredstartdate" class="required"
+          >Desired Start Date:
+        </label>
         <input
           class="formInput"
-          type="text"
-          placeholder="Ex: June 20"
+          type="date"
+          placeholder="mm-dd-yyyy"
           name="desiredStart"
+          id="startDateInput"
+          onChange="updateEndMin()"
+          required
         />
+        <script>
+          function updateEndMin(){
+            document.getElementById("endDateInput").min = document.getElementById("startDateInput").value
+          }
+        </script>
+
       </div>
       <div class="formInputGroup">
-        <label for="LengthOfRole">Length of Role: </label>
+        <label for="LengthOfRole" class="required">Length of Role: </label>
 
         <div class="radioForm">
-          <lable class="commitRadio">
-            <input class="formInput" type="radio" value="Temporarily" />
+          <label class="commitRadio">
+            <input class="formInput" type="radio" value="Temporarily" name="roleLength" required/>
             Temporarily
-          </lable>
+          </label>
+        
 
           <div class="formInputGroup Dates available">
+            <label>Desired End Date</label>
             <input
               class="formInput"
-              type="text"
-              placeholder="Dates available"
-              name="LengthOfRole"
+              type="date"
+              placeholder="End Date"
+              name="endDate"
+              id="endDateInput"
             />
           </div>
 
-          <div class="radioForm">
-            <lable class="commitRadio">
-              <input class="formInput" type="radio" value="Indefinitely" />
-              Indefinitely
-            </lable>
-          </div>
-          <label for="Compensation">Compensation: </label>
-          <input
-            class="formInput"
-            type="text"
-            placeholder="Ex. $15/hr"
-            name="Compensation"
-          />
+          
+          <label class="commitRadio">
+            <input class="formInput" type="radio" name="roleLength" value="Indefinitely" />
+            Indefinitely
+          </label>
+          
         </div>
-        <label for="SupplementalPay"
-          >Suplemental Pay and Benefits:
-        </label>
+      </div>
+      <div class="formInputGroup">
+        <label for="Compensation" class="required">Compensation (per hour): </label>
+        <input
+          class="formInput"
+          type="number"
+          placeholder="Ex. $15/hr"
+          name="Compensation"
+          oninvalid="payError=document.getElementById('payError'); 
+          payError.textContent = 'Please enter a numerical value';
+          payError.style.color = 'red'"
+          required
+        />
+        <span id="payError"></span>
+      </div>
+      <div class="formInputGroup">
+        <label for="SupplementalPay">Supplemental Pay and Benefits: </label>
         <input
           class="formInput"
           type="text"
-          placeholder="Ex. ?????"
+          placeholder="Ex. Free Lunch"
           name="SupplementalPay"
         />
-
-        <label for="CovidPrecautions"
-          >Suplemental COVID-19 Precautions:
-        </label>
+      </div>
+      <div class="formInputGroup">
+        <label for="CovidPrecautions">Supplemental COVID-19 Precautions: </label>
         <input
           class="formInput"
           type="text"
@@ -127,7 +145,6 @@
         <div>
           <button class="submitBtn" onclick="history.back()" type="button">Back</button>
           <button class="submitBtn" type="submit">Next</button>
-        </div>
       </div>
     </form>
   </body>

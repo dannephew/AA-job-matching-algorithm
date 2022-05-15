@@ -25,21 +25,23 @@
 
     <form class="signupForm" action="/roster_creation/2/<%= roster._id %>", method="POST">
       <div class="formInputGroup">
-        <label for="JobTitle">Job Title: </label>
+        <label for="JobTitle" class="required">Job Title: </label>
         <input
           class="formInput"
           type="text"
           placeholder="Ex: Cashier"
           name="JobTitle"
+          required
         />
       </div>
       <div class="formInputGroup">
-        <label for="JobDesc">Job Description: </label>
+        <label for="JobDesc" class="required">Job Description: </label>
         <input
           class="formInput"
           type="text"
           placeholder="Ex: "
           name="JobDesc"
+          required
         />
       </div>
 
@@ -48,13 +50,13 @@
         <input 
           class="formInput" 
           type="text" 
-          placeholder="Ex: Bartending"
+          placeholder="Ex: Bartending, Customer Service, ..."
           name="Skills" 
         />
       </div>
 
       <div class="formInputGroup">
-        <label for="Location">Location: </label>
+        <label for="Location"class="required" >Location: </label>
 
         <div class="radioForm">
           <label class="locationRadio">
@@ -63,44 +65,47 @@
             type="radio" 
             value="One Location" 
             name = "location"
+            required
             /> One Location
           </label>
 
-          <lable class="locationRadio">
+          <label class="locationRadio">
             <input
               class="formInput"
               type="radio"
               value="Multiple Locations"
               name = "location"
             />Multiple Locations
-          </lable>
+          </label>
 
-          <lable class="locationRadio">
+          <label class="locationRadio">
             <input 
               class="formInput" 
               type="radio" 
               value="Remote"
               name = "location"
             />Remote
-          </lable>
+          </label>
 
-          <lable class="locationRadio">
+          <label class="locationRadio">
             <input 
               class="formInput" 
               type="radio" 
               value="Road" 
               name = "location"
             />Road
-          </lable>
+          </label>
         </div>
       </div>
 
       <div class="formInputGroup additionalInfo">
+        <label for="locationInfo" class="required">More info/Address: </label>
         <input
           class="formInput"
           type="text"
-          placeholder="Additional Info"
+          placeholder="123 Main St, City 12345"
           name="locationInfo"
+          required
         />
       </div>
 
@@ -108,20 +113,20 @@
         <label for="Job Commitment">Job Commitment: </label>
 
         <div class="radioForm">
-          <lable class="commitRadio">
+          <label class="commitRadio">
             <input class="formInput" type="radio" value="fullTime" name = "commitment"/>
             Full-time
-          </lable>
+          </label>
 
-          <lable class="commitRadio">
+          <label class="commitRadio">
             <input class="formInput" type="radio" value="partTime" name = "commitment"/>
             Part-time
-          </lable>
+          </label>
 
-          <lable class="commitRadio">
+          <label class="commitRadio">
             <input class="formInput" type="radio" value="flexible" name = "commitment"/>
             Flexible
-          </lable>
+          </label>
 
       </div>
       <form action = "/roster_creation/1/<%= roster._id %>"></form>
