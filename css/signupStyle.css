@@ -42,3 +42,7 @@ body{
     background-color: black;
     color: white;
 }
+.required:after {
+    content:" *";
+    color: red;
+  }

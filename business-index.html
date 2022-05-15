@@ -16,22 +16,23 @@
         <h1 class="signupHeader">Create a new Account</h1>
         <form class="signupForm" action="/bizCreateAcc" method="POST">
             <div class="formInputGroup">
-                <label  for="CompanyName">Enter Company Name:</label>
-                <input class="formInput" type="text" placeholder="Ex: Company Name" name="CompanyName">
+                <label  for="CompanyName" class="required">Enter Company Name:</label>
+                <input class="formInput" type="text" placeholder="Ex: Company Name" name="CompanyName" required>
             </div>
             <div class="formInputGroup">
-                <label for="BusinessEmail">Enter Company Email:</label>
+                <label for="BusinessEmail" class="required">Enter Company Email:</label>
                 <input class="formInput" type="email" placeholder="Ex: example@email.com" name="BusinessEmail" 
                        oninvalid="emailError=document.getElementById('emailError'); 
                                   emailError.textContent = 'Please enter a valid email.';
-                                  emailError.style.color = 'red'">
+                                  emailError.style.color = 'red'"
+                        required>
             </div>
             <span id="emailError"></span> 
 
 
-            <div class="formInputGroup">
+            <div class="formInputGroup" class="required">
                 <label for="Password">Enter password:</label>
-                <input class="formInput" type="password" placeholder="Ex: password" name="Password" id="passwordVal"> 
+                <input class="formInput" type="password" placeholder="Ex: password" name="Password" id="passwordVal" required> 
                 <div id="check">
                     <input type="checkbox" onclick="togglePasswordVisibility()">Show Password
                 </div>  
@@ -59,8 +60,8 @@
             </script>
 
             <div class="formInputGroup">
-                <label for="managerName">Manager First & Last Name:</label>
-                <input class="formInput" type="text" Placeholder="Ex:FirstName LastName" name="managerName" >
+                <label for="managerName" class="required">Manager First & Last Name:</label>
+                <input class="formInput" type="text" Placeholder="Ex:FirstName LastName" name="managerName" required>
             </div>
 
             <div class="formInputGroup">
@@ -69,8 +70,8 @@
             </div>
 
             <div class="formInputGroup">
-                <label for="phoneNum">Business Phone Number:</label>
-                <input class="formInput" type="text" placeholder="###-###-####" name="phoneNum" id="phoneNum">
+                <label for="phoneNum" class="required">Business Phone Number:</label>
+                <input class="formInput" type="text" placeholder="###-###-####" name="phoneNum" id="phoneNum" required>
             </div>
             <span id="error"></span>            
             <button class="submitBtn" type="submit">Create Account</button>
