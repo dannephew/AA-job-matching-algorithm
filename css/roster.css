@@ -161,3 +161,6 @@ body {
 .calError.item:empty::before{
   content: "\200b"; 
 }
+img {
+  height: 30px;
+}

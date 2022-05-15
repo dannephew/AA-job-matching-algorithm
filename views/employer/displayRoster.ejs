@@ -22,16 +22,6 @@
     <%- include("../components/header", {businessId: roster.BusinessId}); -%>
     <section class="top">
       <h2>Welcome, <%= roster.BusinessName %>!</h2>
-
-      <h2>Your Job Roster</h2>
-
-      <div id="options">
-        <!-- <form action="/roster_creation/"+ {{ business._id }}>
-                    <input class="buttons" type ="submit" value = "Add Roster" />
-                </form> -->
-        <!-- <a href="/roster_creation/<>">Add Roster</a>  -->
-        <!-- %= business._id % was inside the <> -->
-      </div>
     </section>
     <section class="matchSection">
       <h3>Your Rosters</h3>
@@ -56,6 +46,5 @@
     <form action="/businessInfo/<%= roster.BusinessId  %>/<%= roster._id  %>" method="GET">
       <input class="buttons" type="submit" value="View Matches" />
     </form>
-    <button class="submitBtn" onclick="history.back()" type="button">Back</button>
   </body>
 </html>

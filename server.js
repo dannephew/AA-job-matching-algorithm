@@ -15,7 +15,7 @@ var mongoose = require("mongoose");
 const business = require("./models/business");
 var ObjectId = require("mongodb").ObjectId;
 const app = express();
-
+app.use(express.static(__dirname + '/public'));
 var mongoDB =
   "mongodb+srv://reinforcements:reinforcements@cluster0.2szva.mongodb.net/reinforcements?retryWrites=true&w=majority";
 //connecting to our database using the string above ^

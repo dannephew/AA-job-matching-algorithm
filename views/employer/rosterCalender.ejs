@@ -50,10 +50,9 @@
             calError.textContent = 'Please enter at least one availability block';
             calError.style.color = 'red'
           }else{
+            console.log('here')
             document.getElementById("calEvents").value = formattedEvents;
             document.getElementById("calForm").submit();
-
-            
           }
          
          
@@ -77,7 +76,7 @@
       </div>
       <div>
         <button class="submitHrs" onclick="history.back()" type="button">Back</button>
-        <button class="submitHrs" id="rosterSubmit" >
+        <button class="submitHrs" type="button"  id="rosterSubmit" >
           Submit Roster
         </button>
       </div>
