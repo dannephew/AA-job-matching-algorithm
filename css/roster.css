@@ -155,4 +155,9 @@ body {
   display: flex;
   margin: auto;
   width: 50%;
+  justify-content: space-around;
+}
+
+.calError.item:empty::before{
+  content: "\200b"; 
 }

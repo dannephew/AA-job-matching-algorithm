@@ -41,10 +41,19 @@
               end: new Date(events[i]._instance.range.end)
             }))
           }
-          // turning formatted events into string to store them in the input, can be undo by JSON.parse()
-          document.getElementById("calEvents").value = formattedEvents;
-          document.getElementById("calForm").submit();
+          if (formattedEvents.length == 0){
+            console.log('no events added')
+            calError=document.getElementById('calError'); 
+            calError.textContent = 'Please enter at least one availability block';
+            calError.style.color = 'red'
+          }else{
+            document.getElementById("calEvents").value = formattedEvents;
+            document.getElementById("calForm").submit();
 
+            
+          }
+         
+         
         });
       });
 
@@ -71,12 +80,13 @@
     <form id="calForm" action="/display_roster/<%= roster._id %>" method="POST">
       <div class="calMain">
         <h2>Enter needed availability for roster</h2>
+        <span id="calError"></span>
         <div id="calendar"></div>
         <input id="calEvents" name="calEvents" type="hidden" />
       </div>
-      <div>
-        <button class="submitHrs">Back</button>
-        <button class="submitHrs" id="rosterSubmit" >
+      <div class="btnGroup">
+        <button type='button' class="submitHrs">Back</button>
+        <button type='button' class="submitHrs" id="rosterSubmit" >
           Submit Roster
         </button>
       </div>
