@@ -6,6 +6,16 @@ body{
     display: flex;
     justify-content: center;
 }
+.radioForm {
+    display: inline;
+}
+.formInput {
+    border: 1px solid black;
+    padding: 2vh 1vw;
+}
+.formInput:focus {
+    background-color: #e0e0e0;
+}
 .signupForm{
     display: flex;
     flex-flow: column nowrap;
