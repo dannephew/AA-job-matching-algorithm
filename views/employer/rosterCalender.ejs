@@ -6,6 +6,13 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link type="text/css" rel="stylesheet" href="/css/roster.css" />
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -69,14 +76,14 @@
     <form id="calForm" action="/display_roster/<%= roster._id %>" method="POST">
     <!-- <form id="calForm" action="/di%>"> -->
       <div class="calMain">
-        <h2>Enter needed availability for roster</h2>
+        <h2 class="rosterFormTitle">Enter needed availability for roster</h2>
         <span id="calError"></span>
         <div id="calendar"></div>
         <input id="calEvents" name="calEvents" type="hidden" />
       </div>
-      <div>
-        <button class="submitHrs" onclick="history.back()" type="button">Back</button>
-        <button class="submitHrs" type="button"  id="rosterSubmit" >
+      <div class="btnGroup">
+        <button class="submitBtn" onclick="history.back()" type="button">Back</button>
+        <button class="submitBtn" type="button"  id="rosterSubmit" >
           Submit Roster
         </button>
       </div>

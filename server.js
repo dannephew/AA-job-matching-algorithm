@@ -97,9 +97,14 @@ app.get("/businessInfo/:id", (req, res) => {
     _id: ObjectId(givenObjectId),
   }).then((result) => {
     console.log("result", result);
-    // when id is found in database, send the business account we found to displayBusiness so it can display the business information
-    res.render("./employer/displayBusiness.ejs", { business: result, matches: null });
+    db.collections.RosterCollection.find({BusinessId:ObjectId(givenObjectId) }).limit(4).toArray().then(rosters =>{
+      console.log("rosters", rosters)
+      // when id is found in database, send the business account we found to displayBusiness so it can display the business information
+      res.render("./employer/displayBusiness.ejs", { business: result, matches: null, rosters: rosters});
   });
+    })
+    
+    
 });
 
 //given a business id and roster id, shows account info and matching candidates
@@ -125,10 +130,15 @@ app.get("/businessInfo/:bus_id/:ros_id", (req, res) => {
     //console.log("Match candidates promise: ", matchCandidates);
     matchCandidates.then(function(matches) {
       console.log("Match candidates result", result);
-      res.render("./employer/displayBusiness.ejs", { business: result, matches: matches });
+      db.collections.RosterCollection.find({BusinessId:ObjectId(business_id) }).limit(4).toArray().then(rosters =>{
+        res.render("./employer/displayBusiness.ejs", { business: result, matches: matches, rosters:rosters });
+      })
+      
     }).catch(function() {
       console.log("Match candidates promise rejected");
-      res.render("./employer/displayBusiness.ejs", { business: result, matches: matches });
+      db.collections.RosterCollection.find({BusinessId:ObjectId(business_id)}).limit(4).toArray().then(rosters =>{
+        res.render("./employer/displayBusiness.ejs", { business: result, matches: matches, rosters:rosters });
+      })
     });
   });
 });
