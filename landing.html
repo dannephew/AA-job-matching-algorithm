@@ -6,12 +6,10 @@
     <base href="/">
     <script lang="text/javascript" src="/server.js" defer></script>
     <link type="text/css" rel="stylesheet" href="css/landing.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet"/>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="landing.js"></script>
-    
-    
+    <!-- <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script id = "rendered-js" src="landing.js"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
 </head>
 <body>
@@ -29,31 +27,26 @@
     </div>
     <!-- particles.js container --> 
     
-    <div id="particles-js">
-        <div class = "container">
-            <img class = "resize" src="public/logo.png"></a>
-            <div class="center">Reinforcements</div>
-            <p>
-                You’ve probably walked around your own neighborhood and seen Now Hiring signs, or worse Going out of business signs lining the streets. We learned that The Great Resignation and shifts to a gig economy not only affect large corporations with big HR departments, but also our local business owners who often serve as their own business’ HR department. 
+    <div id="particles-js" style = "z-index: 0;">
+        <form action="/signup" class = "signup">
+            <input class = "button" type="submit" value="Sign Up">
+        </form>
         
-                Founded by MBA students at Northwestern Kellogg, Reinforcements is on a mission to connect busy, time-strapped business owners with individuals in their community who may be looking to work a couple hours a week, whenever businesses need more staff reinforcement. We’re creating a two-sided platform that connects college students and retirees with local business owners- allowing each party to experience unparalleled flexibility and engagement. 
-                
-                Our Reinforcements team currently serves as the hiring concierge for busy, time-strapped business owners. We’re launching in May and excited to bring on more local businesses and continue to grow our Reinforcements workforce. 
-            </p>
-            <form action="/signup">
-                <input type="submit" value="Sign Up">
-            </form>
-
-
-        </div>        
     </div>
+    <img class = "resize" src="public/logo.png"></a>
+    <div class="center">Reinforcements</div>
 
-    <!-- particles.js lib - https://github.com/VincentGarreau/particles.js --> 
+    <p>
+        You've probably walked around your own neighborhood and seen Now Hiring signs, or worse Going out of business signs lining the streets. We learned that The Great Resignation and shifts to a gig economy not only affect large corporations with big HR departments, but also our local business owners who often serve as their own business' HR department. 
+
+        Founded by MBA students at Northwestern Kellogg, Reinforcements is on a mission to connect busy, time-strapped business owners with individuals in their community who may be looking to work a couple hours a week, whenever businesses need more staff reinforcement. We're creating a two-sided platform that connects college students and retirees with local business owners- allowing each party to experience unparalleled flexibility and engagement. 
+        
+        Our Reinforcements team currently serves as the hiring concierge for busy, time-strapped business owners. We're launching in May and excited to bring on more local businesses and continue to grow our Reinforcements workforce. 
+    </p>
+
+    <!-- particles.js lib - https://github.com/VincentGarreau/particles.js -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="landing.js"></script>
-    
-    
-    
+    <script id = "rendered-js" src="landing.js"></script>
 
 </body>
 </html>

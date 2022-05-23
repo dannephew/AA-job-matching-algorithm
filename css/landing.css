@@ -4,6 +4,11 @@
     
 }
 
+p {
+    margin-left:5%; 
+    margin-right:5%;
+}
+
 .resize {
     /* position: absolute; */
     /* top: 5px; */
@@ -16,6 +21,27 @@
 .center {
     text-align: center;
     font-size: 3em;
+}
+
+.signup{
+    position: absolute;
+    text-align: center;
+    bottom: 10%;
+    left:50%;
+    transform: translateX(-50%);
+}
+
+.button{
+    padding: 1.5vh 2vw;
+    /* margin: 2vh 2vw; */
+    background-color: white;
+    border: 1px solid black;
+    opacity: 0.8;
+}
+
+.button:hover{
+    background-color: black;
+    color: white;
 }
 
 /* @keyframes rule is for animation */
@@ -41,7 +67,7 @@
     z-index: -1;
 }
 .waveWrapperInner {
-    position: absolute;
+    position: fixed;
     width: 100%;
     overflow: hidden;
     height: 100%;
@@ -113,18 +139,23 @@ body {
   /* ---- particles.js container ---- */
   
   #particles-js {
-    position: fixed;
-    width: 100%;
+    position: absolute;
+    width: 98%;
     height: 100%;
     z-index: 0;
-    transform: translateY(-50%)
+    /* transform: translateY(-80%); */
+    /* overflow: hidden; */
   }
 
-  form {
+  .inParticles{
+    transform: translateY(120%);
+  }
+
+  /* form {
       z-index: 100;
-  }
+  } */
 
-  .container {
+  /* .container {
       position: absolute;
       transform: translateY(60%)   
-  }
+  } */
