@@ -167,6 +167,9 @@ app.get("/rosterInfo/:id", (req, res) => {
 
 //function to send you to homepage
 app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/landing.html");
+});
+app.get("/signup", (req, res) => {
   res.sendFile(__dirname + "/master-index.html");
 });
 app.get("roster_calender", (req, res) => {
@@ -184,6 +187,10 @@ app.get("/business_signup", (req, res) => {
 app.get("/hr_signup", (req, res) => {
   res.sendFile(__dirname + "/hr-index.html");
 });
+// app.get("/business_signup", (req, res) => {
+//   res.sendFile(__dirname + "/business-index.html");
+// });
+
 //triggered when add roster is clicked on homepage
 app.get("/roster_creation/1/:id", (req, res) => {
   var givenObjectId = req.params.id.toString(); // turning it from int->string
