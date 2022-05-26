@@ -59,9 +59,7 @@ const exampleEmployer = {
 function readBusinessLocationData(scheduler) {
   /* I have to return the zip code here */
   location = scheduler["Location"][1];
-  console.log(location);
   zipCode = location.slice(location.length-5, location.length);
-  console.log(zipCode);
 
   return zipCode;
 }
