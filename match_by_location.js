@@ -39,7 +39,7 @@ var url =
 
 const exampleEmployer = {
   _id: new ObjectId("6279ca40d11ab022a8b733d4"),
-  Location: "60201",
+  Location: ["Habibi In Mediterranean Gril", "825 Church St, Evanston, IL 60201"],
   Availability:
     '{"start":"2022-05-05T14:00:00.000Z","end":"2022-05-05T20:00:00.000Z"}',
   BusinessId: new ObjectId("6279ca3fd11ab022a8b733d0"),
@@ -56,17 +56,27 @@ const exampleEmployer = {
 };
 
 //converts a business or candidate profile into a number 
-function readLocationData(scheduler) {
+function readBusinessLocationData(scheduler) {
+  /* I have to return the zip code here */
+  location = scheduler["Location"][1];
+  console.log(location);
+  zipCode = location.slice(location.length-5, location.length);
+  console.log(zipCode);
+
+  return zipCode;
+}
+
+function readCandidateLocationData(scheduler) {
   location = Number(scheduler["Location"]);
   return location;
 }
 
 function getCandidates(businessProfile, candidatesList) {
   matchedCandindates = [];
-  let businessLocation = readLocationData(businessProfile);
+  let businessLocation = readBusinessLocationData(businessProfile);
 
   candidatesList.forEach(function (candidate, index) {
-    let candidateLocation = readLocationData(candidate);
+    let candidateLocation = readCandidateLocationData(candidate);
 
     /* Check if the candidate's zip code is the SAME as the employer */
     // Ideally, I would want to check if the candidate is in the same county as the employer
@@ -99,14 +109,14 @@ function listCandidates() {
 
 /* Prints out candidates */
 
-// listCandidates().then((allCandidates) => {
-//   let matchCandidates = getCandidates(exampleEmployer, allCandidates);
-//   console.log(matchCandidates);
-// });
+listCandidates().then((allCandidates) => {
+  let matchCandidates = getCandidates(exampleEmployer, allCandidates);
+  console.log(matchCandidates);
+});
 
 //exports.listCandidates = listCandidates();
 //exports.getCandidates = getCandidates();
 
 module.exports = {
-  listCandidates, getCandidates, readLocationData
+  listCandidates, getCandidates, readBusinessLocationData, readCandidateLocationData
 };
