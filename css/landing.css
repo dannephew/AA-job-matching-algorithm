@@ -14,13 +14,13 @@ p {
     /* top: 5px; */
     margin: auto;
     display: block;
-    width: 250px;
+    width: 210px;
     height: auto;
 }
 
 .center {
     text-align: center;
-    font-size: 2.5em;
+    font-size: 2.25em;
 }
 
 .signup{
@@ -79,6 +79,7 @@ p {
 .bgTop {
     /* z-index: 15; */
     opacity: 0.5;
+    /* filter: invert(100%); */
 }
 .bgMiddle {
     /* z-index: 10; */
@@ -130,6 +131,7 @@ p {
 body {
     /* margin: 0; */
     background-color: #17182f;
+    color: #d1d1d1f9;
   }
   
   canvas {
