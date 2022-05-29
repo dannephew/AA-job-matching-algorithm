@@ -46,7 +46,7 @@ app.post("/bizCreateAcc", (req, res) => {
   newBusiness.BusinessEmail = req.body.BusinessEmail;
   newBusiness.Password = req.body.Password;
 
-  // then save that business object to our Bussiness collection database
+  // then save that business object to our Business collection database
   newBusiness
     .save()
     .then((savedBusiness) => {
@@ -317,4 +317,38 @@ app.get("/display_roster/:id", (req, res) => {
     console.log("roster result", result);
     res.render("./employer/displayRoster", { roster: result });
   });
+});
+
+app.get("/employee_availability/:id", (req, res) => {
+  var givenObjectId = req.params.id.toString(); // turning it from int->string
+  console.log("employee id: ", givenObjectId);
+
+  db.collections.CandidateCollection.findOne({
+    _id: ObjectId(givenObjectId),
+  }).then((result) => {
+    console.log("candidate result", result);
+    res.render("./employee/employeeCalender", {candidate: result});
+  });
+});
+
+app.post("/employee_availability_submitted/:id", (req, res) => {
+  var givenObjectId = req.params.id.toString(); // turning it from int->string
+  console.log("employee id: ", givenObjectId);
+  // updates the business with a available times
+  db.collections.CandidateCollection.updateOne(
+    {_id: ObjectId(givenObjectId)},
+    {
+      $set: {
+        Availability: req.body.calEvents
+      }
+    }).then((result) => {
+      db.collections.CandidateCollection.findOne({
+        _id: ObjectId(givenObjectId),
+      }).then((result) => {
+        console.log('updated candidate', result);
+        res.render("./employee/filledOutAvailability", {candidate:result})
+      });
+
+      
+    });  
 });
