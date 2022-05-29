@@ -5,6 +5,7 @@ body{
     justify-content: center;
     margin: 0px;
     height: 100vh;
+    font-size: 40px;
 }
 #signups{
     display: flex;
@@ -15,8 +16,13 @@ body{
     padding: 2vh 2vw;
     margin: 2vh 2vw;
     border: 1px solid black;
+    font-family: 'Times New Roman', Times, serif;
+    font-size:20px;
 }
 .option:hover{
-    background-color: black;
+    background-color: #147DBC;
     color: white;
+    border: 1px solid #147DBC;
+    text-align: center;
+    transition: 0.3s;
 }

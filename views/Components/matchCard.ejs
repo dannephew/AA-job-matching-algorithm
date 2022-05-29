@@ -1,9 +1,9 @@
 
 <section class="matches">
     <% if (matches === null) { %>
-        <p>No available candidates</p>
+        <p>No available candidates, Fill out the roster to get matches!</p>
     <%} else if (matches.length == 0) { %>
-        <p>No available candidates</p>
+        <p>No Matches Found</p>
     <%} else { %>
         <% for(let i=0; i<matches.length; i++) { %>
             <section class="match">

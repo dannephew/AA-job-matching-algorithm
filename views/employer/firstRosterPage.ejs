@@ -20,7 +20,7 @@
   <body>
     <%- include("../Components/header", {businessId: roster.BusinessId}); -%>
     <section class="top">
-      <h2>Create A New Roster</h2>
+      <h2 class="rosterFormTitle">Create A New Roster</h2>
     </section>
 
     <form class="signupForm" action="/roster_creation/2/<%= roster._id %>", method="POST">
@@ -128,11 +128,13 @@
             Flexible
           </label>
 
+        </div>
       </div>
+      <div class="btnGroup">
       <form action = "/roster_creation/1/<%= roster._id %>"></form>
         <input class="submitBtn" type = "submit" value="Next">
       </form>
-      
+      </div>  
 
 
     </form>
