@@ -68,6 +68,8 @@ app.post("/candCreateAcc", (req, res) => {
   newCandidate.CandidateName = req.body.CandidateName;
   newCandidate.Email = req.body.Email;
   newCandidate.Password = req.body.Password;
+  newCandidate.Phone = req.body.Phone;
+  newCandidate.Stage = req.body.Stage;
 
   // Save Candidate object to Candidate collection database
   newCandidate

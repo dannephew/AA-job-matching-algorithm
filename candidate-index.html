@@ -2,6 +2,7 @@
 <html>
     <head>
         <link type="text/css" rel="stylesheet"  href="/css/signupStyle.css">
+        <script src="controllers/formControl.js"></script>
         <title>
             Candidate Create Account
         </title>
@@ -11,21 +12,51 @@
         <!-- update action to one that create a candidate account -->
         <form class="signupForm" action="/candCreateAcc" method="POST">
 
-            <span>add form inputs here</span>
-
             <div class="formInputGroup">
-                <label for="CandidateName">Enter Candidate Name:</label>
-                <input class="formInput" type="text" placeholder="Ex: Name" name="CandidateName">
+                <label for="CandidateName" class="required">Enter Candidate Name:</label>
+                <input class="formInput" type="text" placeholder="Ex: Name" name="CandidateName" required>
             </div>
 
             <div class="formInputGroup">
-                <label for="Email">Enter Candidate Email:</label>
-                <input class="formInput" type="text" placeholder="Ex: example@email.com" name="CandidateEmail">
+                <label for="Email" class="required">Enter Candidate Email:</label>
+                <input class="formInput" type="text" placeholder="Ex: example@email.com" name="CandidateEmail" required>
             </div>
 
             <div class="formInputGroup">
-                <label for="Password">Enter password:</label>
-                <input class="formInput" type="text" placeholder="Ex: password" name="Password">
+                <label for="Phone" class="required">Enter Candidate Phone Number:</label>
+                <input class="formInput" type="text" placeholder="###-###-####" name="CandidatePhone" required>
+            </div>
+
+            <div class="formInputGroup">
+                <label for="Stage"class="required" >Current Stage of Job Application: </label>
+                <div class="radioForm">
+                    <label>
+                    <input 
+                    class="formInput" 
+                    type="radio" 
+                    value="Browsing" 
+                    name="applicationStage"
+                    required
+                    /> Browsing
+                    </label>
+        
+                    <label>
+                    <input
+                        class="formInput"
+                        type="radio"
+                        value="Actively Looking"
+                        name="applicationStage"
+                    />Actively Looking
+                    </label>
+                </div>
+            </div>
+
+            <div class="formInputGroup">
+                <label for="Password" class="required">Enter password:</label>
+                <input class="formInput" type="password" placeholder="Ex: password" name="Password" id="passwordVal" required> 
+                <div id="check">
+                    <input type="checkbox" onclick="togglePasswordVisibility()">Show Password
+                </div>    
             </div>
             
             <button  class="submitBtn" type="submit">Create Account</button>

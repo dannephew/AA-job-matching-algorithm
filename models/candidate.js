@@ -9,6 +9,12 @@ var CandidateSchema = new mongoose.Schema({
     },
     Password: {
         type: String
+    },
+    Phone: {
+        type: String
+    },
+    Stage: {
+        type: String
     }
 
 })
