@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="/css/homePageStyle.css" />
+    <!-- link for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Questrial&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Thank You!</title>
+    <!-- <link rel="stylesheet" href="/style.css"> -->
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
+      <div class="dropdown">
+        <button class="dropbtn">
+          Profile
+          <i class="fa fa-caret-down"> </i><i class="fa fa-fw fa-user"></i>
+        </button>
+      </div>
+    </nav>
+    <section class="top">
+      <h2>Thank you for submitting! We'll get back to you soon with your matches.</h2>
+
+      <button><a href="/candidateInfo/<%= candidate._id%>">Home</a></button>
+    </section>
+  </body>
+</html>
