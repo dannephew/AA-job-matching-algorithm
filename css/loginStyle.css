@@ -15,7 +15,7 @@ body{
     background-color: white;
     padding: 2vh 2vw;
     margin: 2vh 2vw;
-    border: 1px solid black;
+    border: 1px solid #147DBC;
     font-family: 'Times New Roman', Times, serif;
     font-size:20px;
 }
@@ -25,4 +25,7 @@ body{
     border: 1px solid #147DBC;
     text-align: center;
     transition: 0.3s;
+}
+.logo{
+    height: 20vh;
 }

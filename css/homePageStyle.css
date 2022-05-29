@@ -72,6 +72,7 @@ body {
     margin: 1vh 1vw;
     border: 1px solid #147DBC;
     transition: 0.3s;
+    text-decoration: none;
 }
 
 .buttons:hover{

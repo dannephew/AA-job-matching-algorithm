@@ -19,19 +19,11 @@
     <!-- <link rel="stylesheet" href="/style.css"> -->
   </head>
   <body>
-    <nav class="navbar">
-      <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
-      <div class="dropdown">
-        <button class="dropbtn">
-          Profile
-          <i class="fa fa-caret-down"> </i><i class="fa fa-fw fa-user"></i>
-        </button>
-      </div>
-    </nav>
+    <%- include("../Components/header", {businessId: candidate._id}); -%>
     <section class="top">
       <h2>Thank you for submitting! We'll get back to you soon with your matches.</h2>
 
-      <button><a href="/candidateInfo/<%= candidate._id%>">Home</a></button>
+      <button class="buttons"><a href="/candidateInfo/<%= candidate._id%>">Home</a></button>
     </section>
   </body>
 </html>
