@@ -1,0 +1,167 @@
+* {
+    font-family: 'Questrial', sans-serif;
+    z-index: 1;
+    
+}
+
+p {
+    margin-left:5%; 
+    margin-right:5%;
+    margin-top: 5vw;
+    font-size: 1.7vw;
+}
+
+.resize {
+    /* position: absolute; */
+    /* top: 5px; */
+    margin: auto;
+    display: block;
+    width: 210px;
+    height: auto;
+}
+
+.center {
+    text-align: center;
+    font-size: 2.25em;
+}
+
+.signup{
+    position: fixed;
+    text-align: center;
+    bottom: 2%;
+    left:50%;
+    transform: translateX(-50%);
+}
+
+.button{
+    padding: 1.5vh 2vw;
+    /* margin: 2vh 2vw; */
+    background-color: white;
+    border: 1px solid black;
+    opacity: 0.8;
+}
+
+.button:hover{
+    background-color: black;
+    color: white;
+}
+
+/* @keyframes rule is for animation */
+@keyframes move_wave {
+    0% {
+        transform: translateX(0) translateZ(0) scaleY(1)
+    }
+    50% { 
+        transform: translateX(-25%) translateZ(0) scaleY(0.55)
+        /* 50% of animation done */
+    }
+    100% {
+        transform: translateX(-50%) translateZ(0) scaleY(1)
+        /* 100% of animation done */
+    }
+}
+.waveWrapper {
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    z-index: -1;
+}
+.waveWrapperInner {
+    position: fixed;
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+    /* bottom: -1px; */
+    background-image: linear-gradient(to top, #3d59d1 30%, #0f0f10 70%);
+}
+.bgTop {
+    /* z-index: 15; */
+    opacity: 0.5;
+    /* filter: invert(100%); */
+}
+.bgMiddle {
+    /* z-index: 10; */
+    opacity: 0.75;
+}
+/* .bgBottom {
+    z-index: 5;
+} */
+.wave {
+    position: fixed;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-repeat: repeat no-repeat;
+    background-position: 0 bottom;
+    transform-origin: center bottom;
+    opacity: 0.5;
+}
+.waveTop {
+    background-image: url('http://front-end-noobs.com/jecko/img/wave-top.png');
+    background-size: 50% 100px;
+    /* background-color: #0f0f10; */
+}
+.waveAnimation .waveTop {
+  animation: move_wave 20s infinite;
+   /* -webkit-animation: move_wave 3s; */
+   /* -webkit-animation-delay: 1s; */
+   /* animation-delay: 1s; */
+}
+.waveMiddle {
+    background-size: 50% 120px;
+    background-image: url('http://front-end-noobs.com/jecko/img/wave-mid.png');
+    /* background-color: ; */
+}
+.waveAnimation .waveMiddle {
+    animation: move_wave 20s linear infinite;
+}
+.waveBottom {
+    background-size: 50% 100px;
+    /* opacity: 0.75; */
+}
+.waveAnimation .waveBottom {
+    animation: move_wave 15s linear infinite;
+}
+
+/* Stars */
+/* ---- reset ---- */
+
+body {
+    /* margin: 0; */
+    background-color: #17182f;
+    color: #d1d1d1f9;
+  }
+  
+  canvas {
+    display: block;
+    /* vertical-align: bottom; */
+  }
+  
+  
+  /* ---- particles.js container ---- */
+  
+  #particles-js {
+    position: absolute;
+    width: 98%;
+    height: 100%;
+    z-index: 0;
+    /* transform: translateY(-80%); */
+    /* overflow: hidden; */
+  }
+
+  .inParticles{
+    transform: translateY(120%);
+  }
+
+  /* form {
+      z-index: 100;
+  } */
+
+  /* .container {
+      position: absolute;
+      transform: translateY(60%)   
+  } */
