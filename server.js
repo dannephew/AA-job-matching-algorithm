@@ -5,7 +5,10 @@ var Roster = require("./models/roster");
 
 // job matches
 var matchHelp = require("./schedule");
+var locationMatchHelp = require("./match_by_location");
 //console.log(matches);
+// global variable that will hold the locations
+var globalReq = 0;
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -114,6 +117,23 @@ app.get("/businessInfo/:bus_id/:ros_id", (req, res) => {
   }).then((result) => {
     console.log("result", result);
 
+    // getting candidates with location matching availabilities
+    locationMatchCandidates = locationMatchHelp.listCandidates().then((allCandidates) => {
+      //console.log(allCandidates);
+      let locationMatchCandidates = locationMatchHelp.getCandidates(result, allCandidates);
+      //console.log("Matched candid", matchCandidates);
+      return locationMatchCandidates;
+    });
+
+    //console.log("Match candidates promise: ", matchCandidates);
+    locationMatchCandidates.then(function(matches) {
+      console.log("Match candidates result", result);
+      res.render("./employer/displayBusiness.ejs", { business: result, matches: matches });
+    }).catch(function() {
+      console.log("Match candidates promise rejected");
+      res.render("./employer/displayBusiness.ejs", { business: result, matches: matches });
+    });
+
     // getting candidates with matching availabilities
     matchCandidates = matchHelp.listCandidates().then((allCandidates) => {
       //console.log(allCandidates);
@@ -212,6 +232,7 @@ app.get("/roster_creation/1/:id", (req, res) => {
 // triggered when clicking "next" on first roster page
 app.post("/roster_creation/2/:id", (req, res) => {
   var givenObjectId = req.params.id.toString(); // turning it from int->string
+  globalReq = req; // saving this req
   console.log("given id: ", givenObjectId);
   console.log('given form', req.body)
   // find the current roster through the id passed in the url and update it 
@@ -270,7 +291,8 @@ app.post("/display_roster/:id", (req, res) => {
     // modifying the roster
     {
       $set: {
-      Availability: req.body.calEvents
+      Availability: req.body.calEvents,
+      Location: [globalReq.body.location, globalReq.body.locationInfo]
     }
   }).then((result) => {
     // for now just displaying info of roster on roster page
@@ -281,7 +303,8 @@ app.post("/display_roster/:id", (req, res) => {
           {_id: ObjectId(result.BusinessId)},
           {
             $set: {
-              Availability: req.body.calEvents
+              Availability: req.body.calEvents,
+              Location: [globalReq.body.location, globalReq.body.locationInfo]
             }
           }).then((result) => {
             console.log('updated business', result);

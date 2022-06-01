@@ -79,6 +79,7 @@ function getCandidates(businessProfile, candidatesList) {
     /* Check if the candidate's zip code is the SAME as the employer */
     // Ideally, I would want to check if the candidate is in the same county as the employer
     if (candidateLocation == businessLocation) {
+        console.log("HELLO");
         matchedCandindates.push(candidate);
     }
   });
