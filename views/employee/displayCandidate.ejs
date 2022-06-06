@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link type="text/css" rel="stylesheet" href="/css/homePageStyle.css" />
         <title>
             Candidate Account Info
         </title>
@@ -8,6 +9,14 @@
     </head>
     <body>
         <h1>Welcome <%= candidate.CandidateName %>,</h1>
+        <form
+        class="signupForm"
+        action="/employee_availability/<%= candidate._id %>"
+        method="GET"
+      >
+      <button class="buttons">Fill out availability</button>
+      </form>
+        
         
     </body>
 </html>

@@ -49,7 +49,7 @@ app.post("/bizCreateAcc", (req, res) => {
   newBusiness.BusinessEmail = req.body.BusinessEmail;
   newBusiness.Password = req.body.Password;
 
-  // then save that business object to our Bussiness collection database
+  // then save that business object to our Business collection database
   newBusiness
     .save()
     .then((savedBusiness) => {
@@ -71,6 +71,8 @@ app.post("/candCreateAcc", (req, res) => {
   newCandidate.CandidateName = req.body.CandidateName;
   newCandidate.Email = req.body.Email;
   newCandidate.Password = req.body.Password;
+  newCandidate.Phone = req.body.Phone;
+  newCandidate.Stage = req.body.Stage;
 
   // Save Candidate object to Candidate collection database
   newCandidate
@@ -100,9 +102,14 @@ app.get("/businessInfo/:id", (req, res) => {
     _id: ObjectId(givenObjectId),
   }).then((result) => {
     console.log("result", result);
-    // when id is found in database, send the business account we found to displayBusiness so it can display the business information
-    res.render("./employer/displayBusiness.ejs", { business: result, matches: null });
+    db.collections.RosterCollection.find({BusinessId:ObjectId(givenObjectId) }).limit(4).toArray().then(rosters =>{
+      console.log("rosters", rosters)
+      // when id is found in database, send the business account we found to displayBusiness so it can display the business information
+      res.render("./employer/displayBusiness.ejs", { business: result, matches: null, rosters: rosters});
   });
+    })
+    
+    
 });
 
 //given a business id and roster id, shows account info and matching candidates
@@ -145,10 +152,15 @@ app.get("/businessInfo/:bus_id/:ros_id", (req, res) => {
     //console.log("Match candidates promise: ", matchCandidates);
     matchCandidates.then(function(matches) {
       console.log("Match candidates result", result);
-      res.render("./employer/displayBusiness.ejs", { business: result, matches: matches });
+      db.collections.RosterCollection.find({BusinessId:ObjectId(business_id) }).limit(4).toArray().then(rosters =>{
+        res.render("./employer/displayBusiness.ejs", { business: result, matches: matches, rosters:rosters });
+      })
+      
     }).catch(function() {
       console.log("Match candidates promise rejected");
-      res.render("./employer/displayBusiness.ejs", { business: result, matches: matches });
+      db.collections.RosterCollection.find({BusinessId:ObjectId(business_id)}).limit(4).toArray().then(rosters =>{
+        res.render("./employer/displayBusiness.ejs", { business: result, matches: matches, rosters:rosters });
+      })
     });
   });
 });
@@ -187,6 +199,9 @@ app.get("/rosterInfo/:id", (req, res) => {
 
 //function to send you to homepage
 app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/landing.html");
+});
+app.get("/signup", (req, res) => {
   res.sendFile(__dirname + "/master-index.html");
 });
 app.get("roster_calender", (req, res) => {
@@ -204,6 +219,10 @@ app.get("/business_signup", (req, res) => {
 app.get("/hr_signup", (req, res) => {
   res.sendFile(__dirname + "/hr-index.html");
 });
+// app.get("/business_signup", (req, res) => {
+//   res.sendFile(__dirname + "/business-index.html");
+// });
+
 //triggered when add roster is clicked on homepage
 app.get("/roster_creation/1/:id", (req, res) => {
   var givenObjectId = req.params.id.toString(); // turning it from int->string
@@ -328,4 +347,38 @@ app.get("/display_roster/:id", (req, res) => {
     console.log("roster result", result);
     res.render("./employer/displayRoster", { roster: result });
   });
+});
+
+app.get("/employee_availability/:id", (req, res) => {
+  var givenObjectId = req.params.id.toString(); // turning it from int->string
+  console.log("employee id: ", givenObjectId);
+
+  db.collections.CandidateCollection.findOne({
+    _id: ObjectId(givenObjectId),
+  }).then((result) => {
+    console.log("candidate result", result);
+    res.render("./employee/employeeCalender", {candidate: result});
+  });
+});
+
+app.post("/employee_availability_submitted/:id", (req, res) => {
+  var givenObjectId = req.params.id.toString(); // turning it from int->string
+  console.log("employee id: ", givenObjectId);
+  // updates the business with a available times
+  db.collections.CandidateCollection.updateOne(
+    {_id: ObjectId(givenObjectId)},
+    {
+      $set: {
+        Availability: req.body.calEvents
+      }
+    }).then((result) => {
+      db.collections.CandidateCollection.findOne({
+        _id: ObjectId(givenObjectId),
+      }).then((result) => {
+        console.log('updated candidate', result);
+        res.render("./employee/filledOutAvailability", {candidate:result})
+      });
+
+      
+    });  
 });

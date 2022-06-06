@@ -6,6 +6,16 @@ body{
     display: flex;
     justify-content: center;
 }
+.radioForm {
+    display: inline;
+}
+.formInput {
+    border: 1px solid #147DBC;
+    padding: 2vh 1vw;
+}
+.formInput:focus {
+    background-color: #e0e0e0;
+}
 .signupForm{
     display: flex;
     flex-flow: column nowrap;
@@ -25,7 +35,7 @@ body{
   }
 
 .formInput{
-    border: 1px solid black;
+    border: 1px solid #147DBC;
     padding: 2vh 1vw;
 }
 .formInput:focus{
@@ -36,10 +46,11 @@ body{
     padding: 2vh 2vw;
     margin: 2vh 2vw;
     background-color: white;
-    border: 1px solid black;
+    border: 1px solid #147DBC;
+    transition: 0.3s;
 }
 .submitBtn:hover{
-    background-color: black;
+    background-color: #147DBC;
     color: white;
 }
 .required:after {

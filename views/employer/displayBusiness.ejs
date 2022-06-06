@@ -21,26 +21,29 @@
   <body>
     <%- include("../Components/header", {businessId: business._id}); -%>
     <section class="top">
-      <h2>Welcome, <%= business.CompanyName %>!</h2>
-      <h2>Your Job Postings</h2>
-      <form>
-        <input class="postings" type="submit" value="Cashier 1" />
-      </form>
-      <form>
-        <input class="postings" type="submit" value="Cashier 2" />
-      </form>
+      <h1>Welcome, <%= business.CompanyName %>!</h2>
+      <h2 class="homepageHeaders">Your Rosters</h2>
+      <% if (rosters) { %>
+        <% for (roster of rosters) { %>
+          <%- include("../Components/RosterInfo", {roster:roster}); -%>
+        <%} %>
+      <%} else {%>
+
+        <h3>No rosters found. Fill out a roster to find it here.</h3>
+      <% } %>
+     
 
       <div id="options">
         <form action="/roster_creation/1/<%= business._id  %>" method="GET">
           <input class="buttons" type="submit" value="Add Roster" />
         </form>
-        <!-- <a href="/roster_creation/1/<%= business._id %>">Add Roster</a> -->
       </div>
     </section>
     <section class="matchSection">
-      <h3>Your matches</h3>
-      <%- include("../Components/matchCard", {business: business, matches: matches});-%>
+      <h2 class="homepageHeaders">Your matches</h2>
       
+      <%- include("../Components/matchCard", {business: business, matches: matches});-%>
+
     </section>
    
   </body>
