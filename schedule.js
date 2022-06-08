@@ -63,7 +63,7 @@ function readTimeData(scheduler) {
 }
 
 function getCandidates(businessProfile, candidatesList) {
-  matchedCandindates = [];
+  var matchedCandindates = [];
   let businessHours = readTimeData(businessProfile);
 
   candidatesList.forEach(function (candidate, index) {
@@ -72,14 +72,14 @@ function getCandidates(businessProfile, candidatesList) {
     //only check candidates whose availability are slots are more or equal to the business needs
     //if the candidate only has 1 slot of availability but the business needs two, then by default
     //the candidate is not a match.
-    if (candidateHours.length >= businessHours.length) {
+    if (businessHours.length >= candidateHours.length) {
       let check = compareHours(businessHours, candidateHours);
-      if (check) {
+      if (check) {    
         matchedCandindates.push(candidate);
       }
     }
   });
-
+  
   return matchedCandindates;
 }
 

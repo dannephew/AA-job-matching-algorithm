@@ -5,7 +5,10 @@ var Roster = require("./models/roster");
 
 // job matches
 var matchHelp = require("./schedule");
+var locationMatchHelp = require("./match_by_location");
 //console.log(matches);
+// global variable that will hold the locations
+var globalReq = 0;
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -114,33 +117,24 @@ app.get("/businessInfo/:bus_id/:ros_id", (req, res) => {
   //we can acesses the id passed to /businessInfo through req.params.id
   var business_id = req.params.bus_id.toString(); // turning it from int->string
   console.log("given id: ", business_id);
-
+  var finalMatches = []
   //once we got the id passed to this function, search the database for that id
   db.collections.BusinessCollection.findOne({
     _id: ObjectId(business_id),
   }).then((result) => {
     console.log("result", result);
-
     // getting candidates with matching availabilities
     matchCandidates = matchHelp.listCandidates().then((allCandidates) => {
-      //console.log(allCandidates);
-      let matchCandidates = matchHelp.getCandidates(result, allCandidates);
-      //console.log("Matched candid", matchCandidates);
-      return matchCandidates;
-    });
+      console.log('all candidates', allCandidates.length)
+      let locationMatches = locationMatchHelp.getCandidates(result, allCandidates);
+      console.log("location matches", locationMatches.length);
+      //filter through those who fit the location reqs to see if they meet time reqs
+      finalMatches = matchHelp.getCandidates(result, locationMatches);
 
-    //console.log("Match candidates promise: ", matchCandidates);
-    matchCandidates.then(function(matches) {
-      console.log("Match candidates result", result);
+      console.log("matches", finalMatches);
       db.collections.RosterCollection.find({BusinessId:ObjectId(business_id) }).limit(4).toArray().then(rosters =>{
-        res.render("./employer/displayBusiness.ejs", { business: result, matches: matches, rosters:rosters });
-      })
-      
-    }).catch(function() {
-      console.log("Match candidates promise rejected");
-      db.collections.RosterCollection.find({BusinessId:ObjectId(business_id)}).limit(4).toArray().then(rosters =>{
-        res.render("./employer/displayBusiness.ejs", { business: result, matches: matches, rosters:rosters });
-      })
+        res.render("./employer/displayBusiness.ejs", { business: result, matches: finalMatches, rosters:rosters });
+      }) 
     });
   });
 });
@@ -231,6 +225,7 @@ app.get("/roster_creation/1/:id", (req, res) => {
 // triggered when clicking "next" on first roster page
 app.post("/roster_creation/2/:id", (req, res) => {
   var givenObjectId = req.params.id.toString(); // turning it from int->string
+  globalReq = req; // saving this req
   console.log("given id: ", givenObjectId);
   console.log('given form', req.body)
   // find the current roster through the id passed in the url and update it 
@@ -289,7 +284,8 @@ app.post("/display_roster/:id", (req, res) => {
     // modifying the roster
     {
       $set: {
-      Availability: req.body.calEvents
+      Availability: req.body.calEvents,
+      Location: [globalReq.body.location, globalReq.body.locationInfo]
     }
   }).then((result) => {
     // for now just displaying info of roster on roster page
@@ -300,7 +296,8 @@ app.post("/display_roster/:id", (req, res) => {
           {_id: ObjectId(result.BusinessId)},
           {
             $set: {
-              Availability: req.body.calEvents
+              Availability: req.body.calEvents,
+              Location: [globalReq.body.location, globalReq.body.locationInfo]
             }
           }).then((result) => {
             console.log('updated business', result);
@@ -338,6 +335,20 @@ app.get("/employee_availability/:id", (req, res) => {
   });
 });
 
+
+app.get("/employee_history/:id", (req, res) => {
+  var givenObjectId = req.params.id.toString(); // turning it from int->string
+  console.log("employee id: ", givenObjectId);
+
+  db.collections.CandidateCollection.findOne({
+    _id: ObjectId(givenObjectId),
+  }).then((result) => {
+    console.log("candidate result", result);
+    res.render("./employee/candidateHistoryForm", {candidate: result});
+  });
+});
+
+
 app.post("/employee_availability_submitted/:id", (req, res) => {
   var givenObjectId = req.params.id.toString(); // turning it from int->string
   console.log("employee id: ", givenObjectId);
@@ -358,4 +369,31 @@ app.post("/employee_availability_submitted/:id", (req, res) => {
 
       
     });  
+});
+
+app.post("/employee_history_submitted/:id", (req, res) => {
+  var givenObjectId = req.params.id.toString(); // turning it from int->string
+  console.log("employee id: ", givenObjectId);
+  console.log('---------------given info:', req.body)
+  // updates the business with a available times
+  db.collections.CandidateCollection.updateOne(
+    {_id: ObjectId(givenObjectId)},
+    {
+      $set: {
+        Authorization: req.body.CandidateAuthorization,
+        Location: req.body.CandidateAddress,
+        travelRadius: req.body.CandidateRadius,
+        workCulturePreference: req.body.CandidateWorkCulture
+      }
+    }).then((result) => {
+      db.collections.CandidateCollection.findOne({
+        _id: ObjectId(givenObjectId),
+      }).then((result) => {
+        console.log('updated candidate', result);
+        res.render("./employee/filledOutAvailability", {candidate:result})
+      });
+
+    })
+      
+  //   });  
 });
