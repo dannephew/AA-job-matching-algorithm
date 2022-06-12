@@ -68,16 +68,11 @@ function getCandidates(businessProfile, candidatesList) {
 
   candidatesList.forEach(function (candidate, index) {
     let candidateHours = readTimeData(candidate);
-
-    //only check candidates whose availability are slots are more or equal to the business needs
-    //if the candidate only has 1 slot of availability but the business needs two, then by default
-    //the candidate is not a match.
-    if (businessHours.length >= candidateHours.length) {
-      let check = compareHours(businessHours, candidateHours);
-      if (check) {    
-        matchedCandindates.push(candidate);
-      }
+    let check = compareHours(businessHours, candidateHours);
+    if (check) {    
+      matchedCandindates.push(candidate);
     }
+    
   });
   
   return matchedCandindates;
