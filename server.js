@@ -22,6 +22,7 @@ app.use(express.static(__dirname + '/public'));
 var mongoDB =
   "mongodb+srv://reinforcements:reinforcements@cluster0.2szva.mongodb.net/reinforcements?retryWrites=true&w=majority";
 //connecting to our database using the string above ^
+
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
 db.on("connected", function () {
