@@ -1,0 +1,107 @@
+* {
+    font-family: 'Questrial', sans-serif;
+}
+
+body {
+    margin: 0px;
+}
+
+.matchSection{
+    margin: 2vh 1vw 2vh 1vw;
+    display: flex;
+    flex-flow: column nowrap;
+}
+.matchSection h3{
+    font-size: 4vh;
+    margin: 1vh 0;
+}
+.matches{
+    display: flex;
+    flex-flow: column nowrap;
+}
+.match{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 8px 8px #aaa;
+   
+    padding: 1vh 1vw;
+    margin: 1vh 1vw;
+
+}
+.match .fa-user{
+    font-size: 10vw;
+}
+.fa-calendar{
+    font-size: 10vw;
+}
+.match h4{
+    font-size: 3.2vh;
+    margin: 0;
+}
+.match span{
+    font-size: 3vh;
+}
+.matchText{
+    display: flex;
+    flex-flow: column nowrap;
+}
+.matchCalendar{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+.matchCalendar span{
+    font-size: 2.5vh;
+    
+}
+.matchCalendar span:hover{
+    text-decoration: underline;
+}
+
+
+#options{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.buttons{
+    background-color: white;
+    padding: 1.5vh 1vw;
+    margin: 1vh 1vw;
+    border: 1px solid #147DBC;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.buttons:hover{
+    background-color: #147DBC;
+    color: white;
+}
+
+.postings{
+    background-color: white;
+    padding: 1vh 2vw;
+    margin: 1vh 1vw;
+    border: 1px solid black;
+    font-size: 1vw;
+}
+
+.postings:hover{
+    background-color: black;
+    color: white;
+}
+
+.rosterCard{
+    border: 1px solid #ddd;
+    margin: 1vh 1vw;
+    padding: 1vh 1vw;
+    display: flex;
+    flex-flow: column nowrap;
+    box-shadow: 0 4px 6px 0 rgba(0,0,0,0.2);
+}
+.rosterTitle{
+    margin: 0vh;
+}
+

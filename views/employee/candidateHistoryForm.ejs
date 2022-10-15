@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link type="text/css" rel="stylesheet"  href="/css/signupStyle.css">
+        <script src="/controllers/formControl.js"></script>
+        <title>
+            Candidate History
+        </title>
+    </head>
+    <body>
+        <h1  class="signupHeader" >Please answer the questions below</h1>
+        <!-- update action to one that create a candidate account -->
+        <form class="signupForm" action="/employee_history_submitted/<%= candidate._id %>" method="POST">
+
+            <div class="formInputGroup">
+                <label for="CandidateAuthorization" class="required">Work Authorization:</label>
+                <select class="formInput" type="text" name="CandidateAuthorization" required>
+                    <option value="full_auth">Fully Authorized</option>
+                    <option value="not_auth">Not Authorized</option>
+                </select>
+            </div>
+
+            <div class="formInputGroup">
+                <label for="CandidateAddress" class="required">Address: </label>
+                    <input
+                    class="formInput"
+                    type="text"
+                    placeholder="123 Main St, City State 12345"
+                    name="CandidateAddress"
+                    required
+                    />
+            </div>
+
+            <div class="formInputGroup">
+                <label for="CandidateRadius" class="required">How far from your current address are you willing to drive?</label>
+                <input class="formInput" type="text" placeholder="X miles" name="CandidateRadius" required>
+            </div>
+
+            <div class="formInputGroup">
+                <label for="CandidateWorkCulture" class="required">What kind of work culture do you work best in?</label>
+                <select id="workCultureSelect" class="formInput" type="text" onClick="selectionLimit()" name="CandidateWorkCulture" multiple required>
+                    <option value="formal">Formal</option>
+                    <option value="casual">Casual</option>
+                    <option value="competitive">Competitive</option>
+                    <option value="collaborative">Collaborative</option>
+                </select>
+            </div>
+            
+            <button  class="submitBtn" type="submit">Finish</button>
+        </form>
+
+    </body>
+</html>

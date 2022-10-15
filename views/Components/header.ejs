@@ -1,0 +1,51 @@
+<nav class="navbar">
+    <a class='headerBtn'href="/businessInfo/<%= businessId %>">
+      <img class='headerLogo' src="/logo.png"></a>
+    
+      <div class="profileWrap">
+        
+        <a class="dropbtn headerBtn">
+         
+          <i class="fa fa-fw fa-user profileIcon"></i>
+        </a>
+        <span> Profile</span>
+    </div>
+    
+  </nav>
+<style>
+.navbar{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    height: 8vh;
+    padding: 0.5vh 2vw;
+}
+
+.headerLogo{
+    height: 7vh;
+}
+
+.homepageHeaders{
+    text-decoration: underline;
+    text-decoration-color: #147DBC;
+}
+.profileIcon{
+    font-size: 4vh;
+}
+.top, .matchSection{
+    margin: 1vh 1vw 1vh 1vw;
+}
+.profileWrap{
+    display: flex;
+    flex-flow: column nowrap;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+.profileWrap:hover{
+    color: #147DBC;
+}
+</style>

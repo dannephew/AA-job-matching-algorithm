@@ -1,0 +1,98 @@
+* {
+  font-family: "Questrial", sans-serif;
+}
+
+body {
+  margin: 0px;
+}
+.rosterFormTitle{
+  text-align: center;
+}
+.rosterForm {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+.formInputGroup {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2vh;
+  width: 50%;
+}
+.formInput {
+  border: 1px solid #147DBC;
+  padding: 2vh 1vw;
+}
+.formInput:focus {
+  background-color: #e0e0e0;
+}
+
+
+.radioForm {
+  display: inline;
+}
+
+.additionalInfo {
+  padding-left: 10em;
+}
+
+.submitBtn {
+  padding: 2vh 2vw;
+  margin: 2vh 2vw;
+  background-color: white;
+  border: 1px solid #147DBC;
+  text-align: center;
+  align-items: flex-start;
+  width: 50%;
+  transition: 0.3s;
+}
+.submitBtn:hover{
+  background-color: #147DBC;
+  color: white;
+}
+
+#calendar{
+  width:80%;
+  margin:auto;
+}
+.submitHrs {
+  
+  margin: 2vh 2vw;
+  padding: 2vh 0vw;
+  background-color: white;
+  border: 1px solid black;
+  text-align: center;
+  justify-content: center;
+  width:10vw;
+}
+.submitHrs:hover{
+  background-color: black;
+  color:white;
+}
+.calMain{
+  display: flex;
+  flex-flow:column nowrap;
+  justify-content: center;
+  align-items: center;
+
+}
+.required:after {
+  content:" *";
+  color: red;
+}
+.btnGroup{
+  display: flex;
+  margin: auto;
+  width: 50%;
+  justify-content: space-around;
+}
+
+.calError.item:empty::before{
+  content: "\200b"; 
+}
+img {
+  height: 30px;
+}

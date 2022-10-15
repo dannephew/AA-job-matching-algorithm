@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+    <link type="text/css" rel="stylesheet" href="/css/homePageStyle.css" />
+    <title>Candidate Account Info</title>
+    <!-- <link rel="stylesheet" href="/style.css"> -->
+  </head>
+  <body>
+    <%- include("../Components/header", {businessId: candidate._id}); -%>
+    <h1>Welcome <%= candidate.CandidateName %>,</h1>
+    <form
+      class="signupForm"
+      action="/employee_availability/<%= candidate._id %>"
+      method="GET"
+    >
+      <button class="buttons">Fill out availability</button>
+    </form>
+
+    <form
+      class="signupForm"
+      action="/employee_history/<%= candidate._id %>"
+      method="GET"
+    >
+      <button class="buttons">Fill out employee history</button>
+    </form>
+  </body>
+</html>

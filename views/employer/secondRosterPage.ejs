@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="/css/roster.css" />
+    <!-- link for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Questrial&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Create Roster</title>
+  </head>
+
+  <body>
+    <%- include("../Components/header", {businessId: roster.BusinessId}); -%>
+    <!-- ADD MARGIN -->
+    <section class="top">
+      <h2 class="rosterFormTitle">Create A New Roster</h2>
+    </section>
+    <!--  action="/submitRoster/<%= roster._id %>" -->
+    <form
+      class="signupForm"
+      action="/roster_creation/3/<%= roster._id %>"
+      method="POST"
+    >
+      <div class="formInputGroup">
+        <label for="JobTitle" class="required">Job Schedule: </label>
+        <div class="radioForm">
+          <span class="locationRadio">
+            <input
+              class="formInput"
+              type="radio"
+              value="Weekend"
+              name="jobSchedule"
+              required
+            />Weekend
+          </span>
+
+          <span class="locationRadio">
+            <input
+              class="formInput"
+              type="radio"
+              value="DayShift"
+              name="jobSchedule"
+            />Day Shift
+          </span>
+
+          <span class="locationRadio">
+            <input
+              class="formInput"
+              type="radio"
+              value="Road"
+              name="jobSchedule"
+            />Flexible
+          </span>
+        </div>
+      </div>
+      <div class="formInputGroup">
+        <label for="desiredstartdate" class="required"
+          >Desired Start Date:
+        </label>
+        <input
+          class="formInput"
+          type="date"
+          placeholder="mm-dd-yyyy"
+          name="desiredStart"
+          id="startDateInput"
+          onChange="updateEndMin()"
+          required
+        />
+        <script>
+          function updateEndMin(){
+            document.getElementById("endDateInput").min = document.getElementById("startDateInput").value
+          }
+        </script>
+
+      </div>
+      <div class="formInputGroup">
+        <label for="LengthOfRole" class="required">Length of Role: </label>
+
+        <div class="radioForm">
+          <label class="commitRadio">
+            <input class="formInput" type="radio" value="Temporarily" name="roleLength" required/>
+            Temporarily
+          </label>
+        
+
+          <div class="formInputGroup Dates available">
+            <label>Desired End Date</label>
+            <input
+              class="formInput"
+              type="date"
+              placeholder="End Date"
+              name="endDate"
+              id="endDateInput"
+            />
+          </div>
+
+          
+          <label class="commitRadio">
+            <input class="formInput" type="radio" name="roleLength" value="Indefinitely" />
+            Indefinitely
+          </label>
+          
+        </div>
+      </div>
+      <div class="formInputGroup">
+        <label for="Compensation" class="required">Compensation (per hour): </label>
+        <input
+          class="formInput"
+          type="number"
+          placeholder="Ex. $15/hr"
+          name="Compensation"
+          oninvalid="payError=document.getElementById('payError'); 
+          payError.textContent = 'Please enter a numerical value';
+          payError.style.color = 'red'"
+          required
+        />
+        <span id="payError"></span>
+      </div>
+      <div class="formInputGroup">
+        <label for="SupplementalPay">Supplemental Pay and Benefits: </label>
+        <input
+          class="formInput"
+          type="text"
+          placeholder="Ex. Free Lunch"
+          name="SupplementalPay"
+        />
+      </div>
+      <div class="formInputGroup">
+        <label for="CovidPrecautions">Supplemental COVID-19 Precautions: </label>
+        <input
+          class="formInput"
+          type="text"
+          placeholder="Ex. Masks are mandatory"
+          name="CovidPrecautions"
+        />
+      </div>
+      <div class="btnGroup">
+        <button class="submitBtn" onclick="history.back()" type="button">Back</button>
+        <button class="submitBtn" type="submit">Next</button>
+      </div>
+    </form>
+  </body>
+</html>

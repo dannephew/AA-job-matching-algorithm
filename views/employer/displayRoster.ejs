@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="/css/homePageStyle.css" />
+    <!-- link for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Questrial&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Roster Info</title>
+    <!-- <link rel="stylesheet" href="/style.css"> -->
+  </head>
+  <body>
+    <%- include("../Components/header", {businessId: roster.BusinessId}); -%>
+    <section class="top">
+      <h2>Welcome, <%= roster.BusinessName %>!</h2>
+    </section>
+    <section class="matchSection">
+      <h3>Your Rosters</h3>
+      <section class="matches">
+        <section class="match">
+         
+          <p>Job title: <%= roster.JobTitle %></p>
+          <p>Job Description: <%= roster.JobDesc %></p>
+          <p>Skills: <%= roster.Skills %></p>
+          <p>Location: <%= roster.Location[0] %></p>
+          <p>Additional Info: <%= roster.Location[1] %></p>
+          <p>Commitment: <%= roster.Commitment %></p>
+          <p>Job Schedule: <%= roster.JobSchedule %></p>
+          <p>Desired Start Date: <%= roster.DesiredStart %></p>
+          <section class="matchCalendar">
+            <span>see availability</span>
+            <i class="fa-solid fa-calendar"></i>
+          </section>
+        </section>
+      </section>
+    </section>
+    <form action="/businessInfo/<%= roster.BusinessId  %>/<%= roster._id  %>" method="GET">
+      <input class="buttons" type="submit" value="View Matches" />
+    </form>
+  </body>
+</html>

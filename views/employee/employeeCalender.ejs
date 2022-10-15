@@ -1,0 +1,93 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!-- link for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.3.0/main.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.css"
+    />
+    <link type="text/css" rel="stylesheet" href="/css/roster.css" />
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var calendarEl = document.getElementById("calendar");
+        const currentDate = new Date();
+        let currentDay = currentDate.getDay()
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: "timeGridWeek",
+          headerToolbar: false,
+          selectable: true,
+          editable: true,
+          firstDay: currentDay,
+          select: function (info) {
+            alert("selected " + info.startStr + " to " + info.endStr);
+            calendar.addEvent({
+              title: "availability",
+              start: info.startStr,
+              end: info.endStr,
+            });
+          },
+          events: [],
+          allDaySlot: false,
+          height: 480,
+        });
+        calendar.render();
+        const button = document.getElementById("rosterSubmit");
+        button.addEventListener("click", () => {
+          var events = calendar.getEvents();
+          var formattedEvents = []
+          for (let i = 0; i < events.length; i++) {
+            var start = new Date(events[i]._instance.range.start)
+            console.log( "string" , JSON.stringify( new Date(events[i]._instance.range.start)))
+            formattedEvents.push(
+              JSON.stringify({
+              start: new Date(events[i]._instance.range.start),
+              end: new Date(events[i]._instance.range.end)
+            }))
+          }
+          if (formattedEvents.length == 0){
+            console.log('no events added')
+            calError=document.getElementById('calError'); 
+            calError.textContent = 'Please enter at least one availability block';
+            calError.style.color = 'red'
+          }else{
+            console.log('here')
+            document.getElementById("calEvents").value = formattedEvents;
+            document.getElementById("calForm").submit();
+          }
+         
+         
+        });
+      });
+
+     
+    </script>
+  </head>
+
+  <body>
+    <%- include("../Components/header", {businessId: candidate._id}); -%>
+    
+    <form id="calForm" action="/employee_availability_submitted/<%= candidate._id %>" method="POST">
+    <!-- <form id="calForm" action="/di%>"> -->
+      <div class="calMain">
+        <h2>Enter needed availability</h2>
+        <span id="calError"></span>
+        <div id="calendar"></div>
+        <input id="calEvents" name="calEvents" type="hidden" />
+      </div>
+      <div class="btnGroup">
+        <button class="submitBtn" onclick="history.back()" type="button">Back</button>
+        <button class="submitBtn" type="button"  id="rosterSubmit" >
+          Submit Hours
+        </button>
+      </div>
+    </form>
+  </body>
+</html>

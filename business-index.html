@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link type="text/css" rel="stylesheet"  href="/css/signupStyle.css">
+        <script src="controllers/formControl.js"></script>
+        <title>
+            Business Create Account
+        </title>
+        <!-- <link rel="stylesheet" href="/style.css"> -->
+        
+    </head>
+    <script>
+
+    </script>
+    <body>
+        <h1 class="signupHeader">Create a new Account</h1>
+        <form class="signupForm" action="/bizCreateAcc" method="POST">
+            <div class="formInputGroup">
+                <label  for="CompanyName" class="required">Enter Company Name:</label>
+                <input class="formInput" type="text" placeholder="Ex: Company Name" name="CompanyName" required>
+            </div>
+            <div class="formInputGroup">
+                <label for="BusinessEmail" class="required">Enter Company Email:</label>
+                <input class="formInput" type="email" placeholder="Ex: example@email.com" name="BusinessEmail" 
+                       oninvalid="emailError=document.getElementById('emailError'); 
+                                  emailError.textContent = 'Please enter a valid email.';
+                                  emailError.style.color = 'red'"
+                        required>
+            </div>
+            <span id="emailError"></span> 
+
+
+            <div class="formInputGroup" >
+                <label for="Password" class="required">Enter password:</label>
+                <input class="formInput" type="password" placeholder="Ex: password" name="Password" id="passwordVal" required> 
+                <div id="check">
+                    <input type="checkbox" onclick="togglePasswordVisibility()">Show Password
+                </div>  
+            </div>
+            
+            
+            
+            <div class="formInputGroup">
+                <label for="NumberOfEmp">Number of Employees:</label>
+                <input class="formInput" type="number" placeholder="Ex: 100" name="NumberOfEmp" id="NumberOfEmp">
+            </div>
+            <span id="numError"></span>
+            <script>
+                input = document.getElementById("NumberOfEmp");
+                numError = document.getElementById('numError'); 
+                input.addEventListener('keydown', function(e){
+                    key = e.key;
+                    if (!(isFinite(key) || key == 'Backspace')){ // If try to type invalid input
+                        numError.textContent = "Only enter numbers."
+                        numError.style.color = "red"
+                    } else { // Valid input
+                        numError.textContent = ""
+                    }
+                })
+            </script>
+
+            <div class="formInputGroup">
+                <label for="managerName" class="required">Manager First & Last Name:</label>
+                <input class="formInput" type="text" Placeholder="Ex:FirstName LastName" name="managerName" required>
+            </div>
+
+            <div class="formInputGroup">
+                <label for="Role">Role in hiring process:</label>
+                <input class="formInput" type="text" placeholder="Ex: Lead Hr" name="Role" >
+            </div>
+
+            <div class="formInputGroup">
+                <label for="phoneNum" class="required">Business Phone Number:</label>
+                <input class="formInput" type="text" placeholder="###-###-####" name="phoneNum" id="phoneNum" required>
+            </div>
+            <span id="error"></span>            
+            <button class="submitBtn" type="submit">Create Account</button>
+        </form>
+        <script>
+            error = document.getElementById("error");
+            var phone = document.getElementById('phoneNum');
+            var phoneArray = [] // Track previously entered keys
+            var numCount = 0;
+            phone.addEventListener('keydown', function(e){
+                key = e.key;
+                if (key == 'Backspace'){
+                    popKey = phoneArray.pop()
+                    if(isFinite(popKey)) numCount--; // Reduce number count if press 'Backspace'
+                }
+                // Don't type more than 10 numbers
+                if(numCount >= 10) { // Or 11 if #-###-###-####
+                    e.preventDefault();
+                    error.textContent = "You may only enter 10 numbers."
+                    error.style.color = "red"
+                } else {
+                    if(isFinite(key)) numCount++; // if key is a num
+                    // Allow numbers, dashes, and backspace input
+                    if (!(isFinite(key) || key == '-' || key == 'Backspace')){ // If try to type invalid input
+                        e.preventDefault(); // Key won't show up
+                        error.textContent = "Please only enter numbers or dashes."
+                        error.style.color = "red"
+                    } else { // Valid input
+                        if(key != 'Backspace') phoneArray.push(key);
+                        error.textContent = ""
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

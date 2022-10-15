@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="/css/roster.css" />
+    <!-- link for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Questrial&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Create Roster</title>
+  </head>
+  <body>
+    <%- include("../Components/header", {businessId: roster.BusinessId}); -%>
+    <section class="top">
+      <h2 class="rosterFormTitle">Create A New Roster</h2>
+    </section>
+
+    <form class="signupForm" action="/roster_creation/2/<%= roster._id %>", method="POST">
+      <div class="formInputGroup">
+        <label for="JobTitle" class="required">Job Title: </label>
+        <input
+          class="formInput"
+          type="text"
+          placeholder="Ex: Cashier"
+          name="JobTitle"
+          required
+        />
+      </div>
+      <div class="formInputGroup">
+        <label for="JobDesc" class="required">Job Description: </label>
+        <input
+          class="formInput"
+          type="text"
+          placeholder="Ex: "
+          name="JobDesc"
+          required
+        />
+      </div>
+
+      <div class="formInputGroup">
+        <label for="JobSkills">Skills Required: </label>
+        <input 
+          class="formInput" 
+          type="text" 
+          placeholder="Ex: Bartending, Customer Service, ..."
+          name="Skills" 
+        />
+      </div>
+
+      <div class="formInputGroup">
+        <label for="Location"class="required" >Location: </label>
+
+        <div class="radioForm">
+          <label class="locationRadio">
+            <input 
+            class="formInput" 
+            type="radio" 
+            value="One Location" 
+            name = "location"
+            required
+            /> One Location
+          </label>
+
+          <label class="locationRadio">
+            <input
+              class="formInput"
+              type="radio"
+              value="Multiple Locations"
+              name = "location"
+            />Multiple Locations
+          </label>
+
+          <label class="locationRadio">
+            <input 
+              class="formInput" 
+              type="radio" 
+              value="Remote"
+              name = "location"
+            />Remote
+          </label>
+
+          <label class="locationRadio">
+            <input 
+              class="formInput" 
+              type="radio" 
+              value="Road" 
+              name = "location"
+            />Road
+          </label>
+        </div>
+      </div>
+
+      <div class="formInputGroup additionalInfo">
+        <label for="locationInfo" class="required">More info/Address: </label>
+        <input
+          class="formInput"
+          type="text"
+          placeholder="123 Main St, City 12345"
+          name="locationInfo"
+          required
+        />
+      </div>
+
+      <div class="formInputGroup">
+        <label for="Job Commitment">Job Commitment: </label>
+
+        <div class="radioForm">
+          <label class="commitRadio">
+            <input class="formInput" type="radio" value="fullTime" name = "commitment"/>
+            Full-time
+          </label>
+
+          <label class="commitRadio">
+            <input class="formInput" type="radio" value="partTime" name = "commitment"/>
+            Part-time
+          </label>
+
+          <label class="commitRadio">
+            <input class="formInput" type="radio" value="flexible" name = "commitment"/>
+            Flexible
+          </label>
+
+        </div>
+      </div>
+      <div class="btnGroup">
+      <form action = "/roster_creation/1/<%= roster._id %>"></form>
+        <input class="submitBtn" type = "submit" value="Next">
+      </form>
+      </div>  
+
+
+    </form>
+  </body>
+</html>

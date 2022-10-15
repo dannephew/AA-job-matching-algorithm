@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="/css/homePageStyle.css" />
+    <!-- link for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Questrial&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Business Account Info</title>
+    <!-- <link rel="stylesheet" href="/style.css"> -->
+  </head>
+  <body>
+    <%- include("../Components/header", {businessId: business._id}); -%>
+    <section class="top">
+      <h1>Welcome, <%= business.CompanyName %>!</h2>
+      <h2 class="homepageHeaders">Your Rosters</h2>
+      <% if (rosters) { %>
+        <% for (roster of rosters) { %>
+          <%- include("../Components/RosterInfo", {roster:roster}); -%>
+        <%} %>
+      <%} else {%>
+
+        <h3>No rosters found. Fill out a roster to find it here.</h3>
+      <% } %>
+     
+
+      <div id="options">
+        <form action="/roster_creation/1/<%= business._id  %>" method="GET">
+          <input class="buttons" type="submit" value="Add Roster" />
+        </form>
+      </div>
+    </section>
+    <section class="matchSection">
+      <h2 class="homepageHeaders">Your matches</h2>
+      
+      <%- include("../Components/matchCard", {business: business, matches: matches});-%>
+
+    </section>
+   
+  </body>
+  <script>
+    console.log("path: ", document.currentScript.src)
+  </script>
+</html>

@@ -1,0 +1,59 @@
+body{
+    display: flex;
+    flex-flow: column nowrap;
+}
+.signupHeader{
+    display: flex;
+    justify-content: center;
+}
+.radioForm {
+    display: inline;
+}
+.formInput {
+    border: 1px solid #147DBC;
+    padding: 2vh 1vw;
+}
+.formInput:focus {
+    background-color: #e0e0e0;
+}
+.signupForm{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+.formInputGroup{
+    display: flex;
+    justify-content: space-between;
+    margin: 2vh 2vw;
+    width: 40%;
+    flex-direction: column;
+    
+}
+
+#check {
+    float: left;
+  }
+
+.formInput{
+    border: 1px solid #147DBC;
+    padding: 2vh 1vw;
+}
+.formInput:focus{
+    background-color: #e0e0e0;
+}
+.submitBtn{
+    display: flex;
+    padding: 2vh 2vw;
+    margin: 2vh 2vw;
+    background-color: white;
+    border: 1px solid #147DBC;
+    transition: 0.3s;
+}
+.submitBtn:hover{
+    background-color: #147DBC;
+    color: white;
+}
+.required:after {
+    content:" *";
+    color: red;
+  }

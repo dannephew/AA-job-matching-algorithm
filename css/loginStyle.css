@@ -1,0 +1,31 @@
+body{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    margin: 0px;
+    height: 100vh;
+    font-size: 40px;
+}
+#signups{
+    display: flex;
+    flex-flow: row wrap;
+}
+.option{
+    background-color: white;
+    padding: 2vh 2vw;
+    margin: 2vh 2vw;
+    border: 1px solid #147DBC;
+    font-family: 'Times New Roman', Times, serif;
+    font-size:20px;
+}
+.option:hover{
+    background-color: #147DBC;
+    color: white;
+    border: 1px solid #147DBC;
+    text-align: center;
+    transition: 0.3s;
+}
+.logo{
+    height: 20vh;
+}
